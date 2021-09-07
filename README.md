@@ -1,6 +1,7 @@
 # Pokémon Emerald ACE codes and tutorials
 
 Summary:
+- [Certificate exit code bootstrap](exit-code.md)
 - [Hexadecimal writer bad egg](hex-writer.md)
 
 Useful links:

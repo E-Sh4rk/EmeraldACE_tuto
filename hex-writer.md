@@ -12,9 +12,7 @@ As there are 14 boxes, each box name is 8 characters long and a byte is describe
 
 - An ACE glitch species (for instance 0x40E9 for english version). Unstable species such as 0x611 are not recommended (you will loose a lot of time hatching them)
 - If you use a glitch species that executes Thumb code such as 0x40E9, you will also need a Thumb->ARM bootstrap
-- A certificate exit code bootstrap (you can place it in BOX 14 slot 24 for instance,
-and if you have renamed your BOX 14 since the creation of the bootstrap, don't forget
-to restore it with the code [`Restore 'BX r0' in box 14 name`](https://e-sh4rk.github.io/EmeraldACE_web/))
+- A [certificate exit code bootstrap](exit-code.md) (you can place it in the first slot of BOX 14 for instance, and if you have renamed your BOX 14 since the creation of the bootstrap, don't forget to restore it with the code [`Restore 'BX r0' in box 14 name`](https://e-sh4rk.github.io/EmeraldACE_web/))
 
 ## Let's go
 
@@ -193,6 +191,7 @@ If you entered all the codes correctly, your BOX 10 slot 19 should contain a bad
 and no other slot should have been corrupted.
 
 If it is the case, just move the bad egg to the last slot of BOX 14, and you are done.
+Note that the certificate exit code bootstrap must always be placed at least two slots before the hexadecimal-writer bad egg when using it.
 
 ## Testing everything worked
 
