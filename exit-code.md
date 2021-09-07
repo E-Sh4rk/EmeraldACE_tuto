@@ -59,7 +59,7 @@ Box 13: T _ ? n _ _ ! q	[T ?n  !q]
 ```
 
 That's it. The decamark should now have the name `Œ`.
-You should now move it somewhere in BOX 14, but not in the last slot.
+You should now move it somewhere after the Thumb->ARM bootstrap (or the ARM entry point of your ACE setup), but not in the last slot of BOX 14.
 You can put it in the first slot of BOX 14 for instance.
 
 *NOTE: Due to the way it was created, the decamark should not be moved using group selection

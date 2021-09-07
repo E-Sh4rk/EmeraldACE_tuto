@@ -198,15 +198,15 @@ Note that the certificate exit code bootstrap must always be placed at least two
 In order to test your setup, you can enter the following box names and execute ACE.
 
 ```
-Box 1: 00000000
-Box 2: 00000000
-Box 3: BDDCD5E6
-Box 4: E0D9E7FF
-Box 5: FFFF0002
-Box 6: 00000000
-Box 7: 00000000
-Box 8: 01000000
-Box 9: 01000000
+Box  1: 00000000
+Box  2: 00000000
+Box  3: BDDCD5E6
+Box  4: E0D9E7FF
+Box  5: FFFF0002
+Box  6: 00000000
+Box  7: 00000000
+Box  8: 01000000
+Box  9: 01000000
 Box 10: 00000000
 Box 11: 00000000
 Box 12: 00000000
@@ -249,4 +249,69 @@ B11051E2
 7E0059E3
 40F04F42
 10FF2FE1
+```
+
+## Crafting Table bad egg
+
+This bad egg will make the hexadecimal writer more convenient to use.
+
+One issue with the hexadecimal writer bad egg is that it always writes in bytes 0-56 of the BOX 14 slot 29. Thus, it is not possible to write data in the bytes 56-80 of a slot.
+
+The crafting table bad egg will change this behavior: it will define an area of 30 slots (starting in the slot just after the location of this bad egg) such that:
+- The location of a write will be the first location 4-bytes aligned in the crafting table area that contains 56 consecutives bytes 00. It means that, assuming the data you write does not end with multiple 00, your first write will be performed in bytes 0-56 of the first slot, then your next write will be performed in bytes 56-80 of the first slot and bytes 0-32 of the second slot, etc.
+- The data in the area of the crafting table will not be executed when triggering ACE (it will be skipped). Thus, you can freely store the data you want in this area.
+
+In order to create this crafting table bad egg, just write those box names and trigger the hexadecimal-writer bad egg:
+
+```
+Box  1: 46C08FE2
+Box  2: 0080A0E3
+Box  3: 08909CE7
+Box  4: 048088E2
+Box  5: 000000FF
+Box  6: 000059E3
+Box  7: 08C08C10
+Box  8: 20F04F12
+Box  9: 380058E3
+Box 10: 000000FF
+Box 11: 28F04F32
+Box 12: 02901FE5
+Box 13: 09F08FE0
+Box 14: 74090000
+```
+
+A bad egg should appear in BOX 14 slot 29. In order for it to be active, you can place it anywhere after the Thumb->ARM bootstrap (or the ARM entry point of your ACE setup). It does not need to be after the certificate exit code bootstrap as it does not use any exit code. As the 30 slots following this bad egg will be skipped when triggering ACE, you should put it at least 30 slots before the certificate exit code bootstrap (or any data that you want to be executed).
+
+We recommand placing it in BOX 12 slot 9 as you will need to place it there if you want to setup the binary editor and the save hack that allows it to persist after a reset.
+
+If you follow our advice, you boxes should look like that:
+
+```
+BOX 12:
+-  -  -  -  -  -
+A  -  C  +  +  +
++  +  +  +  +  +
++  +  +  +  +  +
++  +  +  +  +  +
+
+BOX 13:
++  +  +  +  +  +
++  +  +  -  -  -
+-  -  -  -  -  -
+-  -  -  -  -  -
+-  -  -  -  -  -
+
+BOX 14:
+E  -  -  -  -  -
+-  -  -  -  -  -
+-  -  -  -  -  -
+-  -  -  -  -  -
+-  -  -  -  -  W
+
+-: Empty slot
+A: Thumb->ARM bootstrap (if any)
+C: Crafting table bad egg
++: Area of the crafting table
+E: Exit code bootstrap
+W: Hexadecimal writer bad egg
 ```
