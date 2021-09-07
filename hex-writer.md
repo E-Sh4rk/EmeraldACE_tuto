@@ -251,7 +251,7 @@ B11051E2
 10FF2FE1
 ```
 
-## Crafting Table bad egg
+# Crafting Table bad egg
 
 This bad egg will make the hexadecimal writer more convenient to use.
 

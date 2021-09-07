@@ -2,7 +2,7 @@
 
 Summary:
 - [Certificate exit code bootstrap](exit-code.md)
-- [Hexadecimal writer bad egg](hex-writer.md)
+- [Hexadecimal writer and crafting table](hex-writer.md)
 
 Useful links:
 - [ACE code generator](https://e-sh4rk.github.io/EmeraldACE_web/)
