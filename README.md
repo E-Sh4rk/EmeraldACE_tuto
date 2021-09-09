@@ -3,6 +3,7 @@
 Summary:
 - [Certificate exit code bootstrap](exit-code.md)
 - [Hexadecimal writer and crafting table](hex-writer.md)
+- [Freezer bad egg (to run code at each frame)](freezer.md)
 
 Useful links:
 - [ACE code generator](https://e-sh4rk.github.io/EmeraldACE_web/)
