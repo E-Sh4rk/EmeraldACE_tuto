@@ -6,4 +6,5 @@ Summary:
 
 Useful links:
 - [ACE code generator](https://e-sh4rk.github.io/EmeraldACE_web/)
+- [Save editor for glitchers](https://github.com/E-Sh4rk/PokeGlitzer)
 
