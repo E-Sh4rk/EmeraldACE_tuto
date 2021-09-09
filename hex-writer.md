@@ -17,7 +17,7 @@ As there are 14 boxes, each box name is 8 characters long and a byte is describe
 ## Let's go
 
 The creation of this bad egg is a little tedious: you will need to execute 10 ACE codes
-the one after the other.
+the one after the other. Fortunately, you can save and restart as many times as you want during this process, there's no risk to corrupt your save.
 
 Each ACE code will write 8 bytes of data in the BOX 10 slot 19, for a total of 80 bytes
 (the entire slot). Please ensure your BOX 10 slot 19 is empty before starting.
