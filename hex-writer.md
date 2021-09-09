@@ -193,6 +193,8 @@ and no other slot should have been corrupted.
 If it is the case, just move the bad egg to the last slot of BOX 14, and you are done.
 Note that the certificate exit code bootstrap must always be placed at least two slots before the hexadecimal-writer bad egg when using it.
 
+When you don't want to use the hexadecimal-writer bad egg (if you just want to execute a standard ACE code for instance), just move it before the last row of BOX 11 and it will not be executed.
+
 ## Testing everything worked
 
 In order to test your setup, you can enter the following box names and execute ACE.
@@ -282,7 +284,7 @@ Box 14: 74090000
 
 A bad egg should appear in BOX 14 slot 29. In order for it to be active, you can place it anywhere after the Thumb->ARM bootstrap (or the ARM entry point of your ACE setup). It does not need to be after the certificate exit code bootstrap as it does not use any exit code. As the 30 slots following this bad egg will be skipped when triggering ACE, you should put it at least 30 slots before the certificate exit code bootstrap (or any data that you want to be executed).
 
-We recommand placing it in BOX 12 slot 9 as you will need to place it there if you want to setup the binary editor and the save hack that allows it to persist after a reset.
+We recommand placing it in BOX 12 slot 9 as you will need to place it there if you want to setup the binary editor and the save hack that allows it to persist after a restart.
 
 If you follow our advice, you boxes should look like that:
 
