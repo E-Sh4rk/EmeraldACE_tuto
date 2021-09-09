@@ -58,14 +58,14 @@ Box 12: _ 1 R ? n _ _ _	[ 1R?n   ]
 Box 13: T _ ? n _ _ ! q	[T ?n  !q]
 ```
 
-That's it. The decamark should now have the name `Œ`.
+That's it. The decamark should now have the name `Á q:·n`.
 You should now move it somewhere after the Thumb->ARM bootstrap (or the ARM entry point of your ACE setup), but not in the last slot of BOX 14.
 You can put it in the first slot of BOX 14 for instance.
 
 *NOTE: Due to the way it was created, the decamark should not be moved using group selection
 or it will disappear.*
 
-You should not rename the BOX 14 (nor use a code that renames it), otherwise the exit code bootstrap will not work. If your BOX 14 gets renamed, don't worry, just execute the following ACE code to restore the good name (the exit code bootstrap must be present in BOX 14, otherwise the following code will crash):
+You should not rename the BOX 14 (nor use a code that renames it), otherwise the exit code bootstrap will not work. Its name should be `Œ`. If your BOX 14 gets renamed, don't worry, just execute the following ACE code to restore the good name (the exit code bootstrap must be present in BOX 14, otherwise the following code will crash):
 
 ```
 Box  1: _ _ _ … _ _ _ _	[   …    ]
