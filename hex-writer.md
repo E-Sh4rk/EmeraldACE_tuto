@@ -197,7 +197,10 @@ When you don't want to use the hexadecimal-writer bad egg (if you just want to e
 
 ## Testing everything worked
 
-In order to test your setup, you can enter the following box names and execute ACE.
+Save your game and try executing the hexadecimal-writer bad egg (no need to rename the boxes for now, we just want to check if the execution crashes or not). It should have written some data (most likely interpreted as a bad egg) in the slot just before the hex-writer. If it crashes, then you probably made a mistake in one of the codes earlier. In this case, reload your save, put your hexadecimal-writer bad egg back in BOX 10 slot 19, and start reexecuting the codes above in order to overwrite the data of your hex-writer that might be erroneous. Each code write a different piece of data so you can execute them in the order you want, and you can check anytime whether your hex-writer has been fixed or not by moving it in the last slot of BOX 14 and triggering ACE.
+
+If it does not crash and seems to write some data in the BOX 14 slot 29, then it is most likely working.
+Nevertheless, if you want to fully test your setup, you can empty the BOX 14 slot 29, enter the following box names and execute the hex-writer.
 
 ```
 Box  1: 00000000
