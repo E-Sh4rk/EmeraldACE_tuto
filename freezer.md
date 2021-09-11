@@ -15,7 +15,7 @@ The *freezer bad egg* is a bad egg that can be used to run any piece of code eac
 
 NOTE: the codes given here are for the english version. The freezer itself should also work on other european versions (not tested yet), but the code you want to execute each frame must be adapted to your version.
 
-Ensure the first two slots of your crafting table area are empty, and execute the hexadecimal-writer bad egg two times (it does not matter if you look at your crafting table area between the two executions, it will not corrupt the data written):
+Ensure the first two slots of your crafting table area are empty, and execute the hexadecimal-writer bad egg two times **without looking at BOX 12** (or where your crafting table area is) between the execution of the two codes:
 
 ```
 =============== CODE 1 ===============
@@ -30,10 +30,7 @@ Box  7: 00000BEF
 Box  8: 28B09FE5
 Box  9: 04B021E5
 Box 10: 18C09FE5
-Box 11: 00000000
-Box 12: 00000000
-Box 13: 00000000
-Box 14: 00000000
+Boxes 11-14: 00000000
 
 =============== CODE 2 ===============
 
@@ -47,10 +44,7 @@ Box  7: 10FF2FE1
 Box  8: FC7F0003
 Box  9: 08F00302
 Box 10: 0C001FE5
-Box 11: 00000000
-Box 12: 00000000
-Box 13: 00000000
-Box 14: 00000000
+Boxes 11-14: 00000000
 ```
 
 You should now have a bad egg in the first slot of your crafting table (and the second slot should still be empty).
@@ -69,11 +63,7 @@ Box  6: 805D0003
 Box  7: 00000000 
 Box  8: 081C0000
 Box  9: 9C700000
-Box 10: 00000000
-Box 11: 00000000
-Box 12: 00000000
-Box 13: 00000000
-Box 14: 00000000
+Boxes 10-14: 00000000
 ```
 
 It will generate an Articuno in the second slot of the crafting table. This Articuno contains the code that will be executed each frame by the freezer. Now, move the freezer in BOX 14 slot 3 and the Articuno in BOX 14 slot 4 (or somewhere else depending on where you put your exit code bootstrap: it should be at least 2 slots after the exit code bootstrap).

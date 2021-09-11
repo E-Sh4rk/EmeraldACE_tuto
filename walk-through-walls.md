@@ -18,7 +18,7 @@ leave the bounds of the map). In order to enable it, it must be executed each fr
 NOTE: the codes given here are for the english version only.
 
 We will use the hexadecimal-writer bad egg in order to write the script in the PC storage.
-You should ensure that you have the hexadecimal-writer bad egg in the last slot of BOX 14 (with the exit code bootstrap at least 2 slots before), and that your freezer bad egg will not be executed instead of the hexadecimal-writer (in order for it to not be executed, you can put it either somewhere in the crafting table area or before the last row of BOX 11). Also ensure that there are at least 3 empty slots at the beginning of the crafting table area, and run these 3 codes (you can freely save and view the crafting table area during the process):
+You should ensure that you have the hexadecimal-writer bad egg in the last slot of BOX 14 (with the exit code bootstrap at least 2 slots before), and that your freezer bad egg will not be executed instead of the hexadecimal-writer (in order for it to not be executed, you can put it either somewhere in the crafting table area or before the last row of BOX 11). Also ensure that there are at least 3 empty slots at the beginning of the crafting table area, and run these 4 codes **without looking at BOX 12** (or where your crafting table area is) between the execution of the codes:
 
 ```
 =============== CODE 1 ===============
@@ -33,44 +33,49 @@ Box  7: 0B005CE1
 Box  8: 80A09F05
 Box  9: B0B8DF01
 Box 10: B0B0CA01
-Box 11: 68A09FE5
-Box 12: 00B09AE5
-Box 13: 64C09FE5
-Box 14: B081DCE1
+Boxes 11-14: 00000000
 
 =============== CODE 2 ===============
 
-Box  1: B291DCE1
-Box  2: 18C0DCE5
-Box  3: 11005CE3
-Box  4: 01908902
-Box  5: 33005CE3
-Box  6: 01804802
-Box  7: 22005CE3
-Box  8: 01904902
-Box  9: 44005CE3
-Box 10: 01808802
-Box 11: 000000FF
-Box 12: 08A09AE5
-Box 13: 88A08AE0
-Box 14: 00000000
+Box  1: 68A09FE5
+Box  2: 00B09AE5
+Box  3: 64C09FE5
+Box  4: B081DCE1
+Box  5: B291DCE1
+Box  6: 18C0DCE5
+Box  7: 11005CE3
+Box  8: 01908902
+Box  9: 33005CE3
+Box 10: 01804802
+Boxes 11-14: 00000000
 
 =============== CODE 3 ===============
 
-Box  1: 990B09E0
-Box  2: 89A08AE0
-Box  3: 28A08FE5
-Box  4: B0B0DAE1
-Box  5: B4B2CFE1
-Box  6: 03CBE0E3
-Box  7: 0CB00BE0
-Box  8: B0B0CAE1
-Box  9: 001FBDE8
-Box 10: 10FF2FE1
-Box 11: 18730302
-Box 12: C05D0003
-Box 13: 50730302
-Box 14: 00000000
+Box  1: 22005CE3
+Box  2: 01904902
+Box  3: 44005CE3
+Box  4: 01808802
+Box  5: 000000FF
+Box  6: 08A09AE5
+Box  7: 88A08AE0
+Box  8: 990B09E0
+Box  9: 89A08AE0
+Box 10: 28A08FE5
+Boxes 11-14: 00000000
+
+=============== CODE 4 ===============
+
+Box  1: B0B0DAE1
+Box  2: B4B2CFE1
+Box  3: 03CBE0E3
+Box  4: 0CB00BE0
+Box  5: B0B0CAE1
+Box  6: 001FBDE8
+Box  7: 10FF2FE1
+Box  8: 18730302
+Box  9: C05D0003
+Box 10: 50730302
+Boxes 11-14: 00000000
 ```
 
 After that, there should be 2 bad eggs at the beginning of your crafting table area.

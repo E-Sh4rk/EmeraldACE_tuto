@@ -216,11 +216,7 @@ Box  6: 00000000
 Box  7: 00000000
 Box  8: 01000000
 Box  9: 01000000
-Box 10: 00000000
-Box 11: 00000000
-Box 12: 00000000
-Box 13: 00000000
-Box 14: 00000000
+Boxes 10-14: 00000000
 ```
 
 Your BOX 14 slot 29 should now contain a shiny Bulbasaur with the name *Charles*.
