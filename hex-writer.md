@@ -1,3 +1,5 @@
+**The bad eggs created in this tutorial should not be moved in your party: it could corrupt them.**
+
 # Hexadecimal-writer bad egg
 
 The purpose of this tutorial is to create a special bad egg that allows easy writing of hexadecimal data in the PC storage.

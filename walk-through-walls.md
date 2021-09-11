@@ -1,3 +1,5 @@
+**The bad eggs created in this tutorial should not be moved in your party: it could corrupt them.**
+
 # Walk through walls
 
 This script will allow you to walk through walls (however it does not allow you to

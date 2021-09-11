@@ -1,3 +1,5 @@
+**The bad eggs created in this tutorial should not be moved in your party: it could corrupt them.**
+
 # Freezer bad egg
 
 The *freezer bad egg* is a bad egg that can be used to run any piece of code each frame. It can be used, among other things, to *freeze* the value of a memory address.
