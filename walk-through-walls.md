@@ -15,6 +15,8 @@ leave the bounds of the map). In order to enable it, it must be executed each fr
 
 ## Let's go
 
+NOTE: the codes given here are for the english version only.
+
 We will use the hexadecimal-writer bad egg in order to write the script in the PC storage.
 You should ensure that you have the hexadecimal-writer bad egg in the last slot of BOX 14 (with the exit code bootstrap at least 2 slots before), and that your freezer bad egg will not be executed instead of the hexadecimal-writer (in order for it to not be executed, you can put it either somewhere in the crafting table area or before the last row of BOX 11). Also ensure that there are at least 3 empty slots at the beginning of the crafting table area, and run these 3 codes (you can freely save and view the crafting table area during the process):
 

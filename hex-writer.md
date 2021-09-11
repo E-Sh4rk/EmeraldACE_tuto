@@ -18,6 +18,8 @@ As there are 14 boxes, each box name is 8 characters long and a byte is describe
 
 ## Let's go
 
+NOTE: the codes given here are encoded using the english charset, but they work for any european version. You just have to replace the quotation marks by their equivalent in your language (see [bulbapedia](https://bulbapedia.bulbagarden.net/wiki/Character_encoding_(Generation_III))).
+
 The creation of this bad egg is a little tedious: you will need to execute 10 ACE codes
 the one after the other. Fortunately, you can save and restart as many times as you want during this process, there's no risk to corrupt your save.
 
