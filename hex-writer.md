@@ -68,7 +68,7 @@ Box  5: x G ? n … F Q m	[xG?n…FQm]
 Box  6: _ _ _ 7 F ? n _	[   7F?n ]
 Box  7: _ _ ’ F Q m _ _	[  ’FQm  ]
 Box  8: _ o R … o _ _ _	[ oR…o   ]
-Box  9: – F R n ♀ F Q m	[–FRn♀FQm]
+Box  9: – F R n ♀ F Q m	[–FRn♀FQm] (/!\ The first letter is a dash and not a space)
 Box 10: _ _ _ z U ? n _	[   zU?n ]
 Box 11: _ _ z F ? n _ _	[  zF?n  ]
 Box 12: _ m F ? n _ _ _	[ mF?n   ]
@@ -197,7 +197,7 @@ When you don't want to use the hexadecimal-writer bad egg (if you just want to e
 
 ## Testing everything worked
 
-Save your game and try executing the hexadecimal-writer bad egg (no need to rename the boxes for now, we just want to check if the execution crashes or not). It should have written some data (most likely interpreted as a bad egg) in the slot just before the hex-writer. If it crashes, then you probably made a mistake in one of the codes earlier. In this case, reload your save, put your hexadecimal-writer bad egg back in BOX 10 slot 19, and start reexecuting the codes above in order to overwrite the data of your hex-writer that might be erroneous. Each code write a different piece of data so you can execute them in the order you want, and you can check anytime whether your hex-writer has been fixed or not by moving it in the last slot of BOX 14 and triggering ACE.
+Save your game and try executing the hexadecimal-writer bad egg (no need to rename the boxes for now, we just want to check if the execution crashes or not). It should have written some data (most likely interpreted as a bad egg) in the slot just before the hex-writer. If it crashes or does not write any data, then you probably made a mistake in one of the codes earlier. In this case, please refer to the appendix.
 
 If it does not crash and seems to write some data in the BOX 14 slot 29, then it is most likely working.
 Nevertheless, if you want to fully test your setup, you can empty the BOX 14 slot 29, enter the following box names and execute the hex-writer.
@@ -336,3 +336,61 @@ You can use the hexadecimal-writer bad egg together with the crafting table in o
 5. Once you've filled the boxes 1-10 with the remaining data, exit the PC and trigger ACE again. That's it, your Pokemon is waiting you in the first slot of the crafting table!
 
 *NOTE: if the first half (40 bytes) of your Pokemon data ends with the bytes `00 00 00 00` (it can happen if your Pokemon has no experience and has a PID equal to its OTID), then the second write will start 4 bytes earlier. In order to compensate that, you must start the second code by `00000000` (and write the second half of the data in the boxes 2-11).*
+
+# Appendix: in case of failure
+
+You should only refer to this section if, after entering the 10 codes for creating the hex-writer, it does not seem to work (either it crashes or it does not write any data).
+
+Put your erroneous hexadecimal-writer bad egg back in BOX 10 slot 19. Ensure you haven't renamed your BOX 14, or [restore it](exit-code.md). Take in your team a pokemon to trigger ACE (a stable one, as you will have to trigger ACE many times), and ensure you have in the second slot of your team a non-glitched Pokemon different than Deoxys. We suggest to save your game at this point. Then, write these box names:
+
+```
+Box  1: x “ U n … F g m    [x“Un…Fgm]
+Box  2: _ _ _ , G ? n _    [   ,G?n ]
+Box  3: _ _ 3 G R n _ _    [  3GRn  ]
+Box  4: _ … F Q m _ _ _    [ …FQm   ]
+Box  5: 4 C U n F “ Q n    [4CUnF“Qn]
+Box  6: _ _ _ A … B m _    [   A…Bm ]
+Box  7: _ _ _ 0 ! n _ _    [   0!n  ]
+Box  8: _ ” … h m _ _ _    [ ”…hm   ]
+Box  9: 8 M … o 0 N R n    [8M…o0NRn]
+Box 10: _ _ _ / R R n _    [   /RRn ]
+Box 11: _ _ . F R n _ _    [  .FRn  ]
+Box 12: _ / 4 R m _ _ _    [ /4Rm   ]
+Box 13: B ♂ R m _ _ _ _    [B♂Rm    ]
+```
+
+It will allow you to read the data of the Pokemon in your BOX 10 slot 19 (i.e. the hex-writer).
+For that, do the following:
+
+1. Trigger ACE (by viewing the summary of your glitched stable species)
+2. Then, view the summary of the Pokemon in the second slot of your team
+3. Its attack and defense stats will be set depending on the value of the 4 first bytes of your hex-writer. Compare it to the table below. If it does not match, remember it.
+4. Go back to step 1 and repeat this process 19 times. Each time, it will read the 4 next bytes of your hex-writer.
+
+```
+N.  Attack:         Defense:
+1.  32838           57999
+2.  1026            58204
+3.  49250           12879
+4.  36864           58272
+5.  4105            59352
+6.  4273            57937
+7.  4112            12945
+8.  45579           20609
+9.  45056           17820
+10. 1               58138
+11. 45057           5324
+12. 45056           5024
+13. 7               58202
+14. 40961           12938
+15. 40960           9120
+16. 36865           8841
+17. 36865           57993
+18. 126             58201
+19. 61504           16975
+20. 65296           57647
+```
+
+Once you've done that, we recommend reloading your save. Now, you can determine which ones of the 10 codes you should reexecute in order to fix your hex-writer. For every iteration that was not matching the table above, you should reexecute the code `(N-1)/2 + 1`. For instance, if the iterations `5` and `6` were not matching, you have to reexecute the code 3 (because `(5-1)/2 + 1 = 3` and `(6-1)/2 + 1 = 3`).
+
+When this is done, you can put your hex-writer in the last slot of BOX 14 and try it again.
