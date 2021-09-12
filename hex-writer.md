@@ -1,11 +1,13 @@
+*UPDATE: The hexadecimal-writer bad egg has been updated on 2021/09/12 in order to fix an issue when the hexadecimal-writer is used after some other ACE codes. Only the codes 1 and 2 have changed. You can still use the old version, but be aware that it might write incorrect data when used after some other ACE codes (a save/reset before using the hex-writer solves this issue).*
+
 **The bad eggs created in this tutorial should not be marked or moved in your party: it could corrupt them.**
 
 # Hexadecimal-writer bad egg
 
 The purpose of this tutorial is to create a special bad egg that allows easy writing of hexadecimal data in the PC storage.
-When this bad egg is placed in the last slot of BOX 14, it changes the behavior of ACE codes:
+When this bad egg is placed in the slot 29 of BOX 14, it changes the behavior of ACE codes:
 instead of considering box names data as ARM binary code, it will interpret the box names text as hexadecimal and write
-this hexadecimal data in the PC storage (by default, in the slot 29 of BOX 14, but this behavior can be changed with another bad egg).
+this hexadecimal data in the PC storage (by default, in the slot 28 of BOX 14, but this behavior will be changed by the crafting table).
 
 As there are 14 boxes, each box name is 8 characters long and a byte is described by 2 hexadecimal digits, you can write up to
 `14*8/2=56` bytes with one ACE execution.
@@ -34,33 +36,33 @@ it will not corrupt the data we are writing.
 
 Box  1: 4 C U n … ” Q n	[4CUn…”Qn]
 Box  2: _ _ _ F ‘ ! n _	[   F‘!n ]
-Box  3: _ _ d U … o _ _	[  dU…o  ]
-Box  4: _ 1 F ? n _ _ _	[ 1F?n   ]
-Box  5: ’ F Q m 8 R … o	[’FQm8R…o]
-Box  6: _ _ _ 1 S R n _	[   1SRn ]
-Box  7: _ _ l G R n _ _	[  lGRn  ]
-Box  8: _ … F Q m _ _ _	[ …FQm   ]
-Box  9: r R … o h U R n	[rR…ohURn]
-Box 10: _ _ _ ” F Q m _	[   ”FQm ]
-Box 11: _ _ S F ? n _ _	[  SF?n  ]
-Box 12: _ ♀ F Q m _ _ _	[ ♀FQm   ]
-Box 13: _ _ _ … _ _ _ _	[   …    ]
+Box  3: _ _ l T … o _ _	[  lT…o  ]
+Box  4: _ ’ F Q m _ _ _	[ ’FQm   ]
+Box  5: 8 R … o 0 S R n	[8R…o0SRn]
+Box  6: _ _ _ V G R n _	[   VGRn ]
+Box  7: _ _ … F Q m _ _	[  …FQm  ]
+Box  8: _ r R … o _ _ _	[ rR…o   ]
+Box  9: h U R n ” F Q m	[hURn”FQm]
+Box 10: _ _ _ r U ? n _	[   rU?n ]
+Box 11: _ _ 0 U ? n _ _	[  0U?n  ]
+Box 12: _ V H ? n _ _ _	[ VH?n   ]
+Box 13: ♀ F Q m _ _ _ _	[♀FQm    ]
 
 =============== CODE 2 ===============
 
 Box  1: 4 C U n _ … Q n	[4CUn …Qn]
-Box  2: _ _ _ L S … o _	[   LS…o ]
-Box  3: _ _ U F ? n _ _	[  UF?n  ]
-Box  4: _ ” F Q m _ _ _	[ ”FQm   ]
-Box  5: z S … o “ S ? n	[zS…o“S?n]
-Box  6: _ _ _ 0 S ? n _	[   0S?n ]
-Box  7: _ _ ’ F Q m _ _	[  ’FQm  ]
-Box  8: _ F R … o _ _ _	[ FR…o   ]
-Box  9: p G ? n 3 G ? n	[pG?n3G?n]
-Box 10: _ _ _ … F Q m _	[   …FQm ]
-Box 11: _ _ m R … o _ _	[  mR…o  ]
-Box 12: _ 7 U ? n _ _ _	[ 7U?n   ]
-Box 13: ♀ F Q m _ _ _ _	[♀FQm    ]
+Box  2: _ _ _ d U … o _	[   dU…o ]
+Box  3: _ _ 1 F ? n _ _	[  1F?n  ]
+Box  4: _ … F Q m _ _ _	[ …FQm   ]
+Box  5: L S … o U F ? n	[LS…oUF?n]
+Box  6: _ _ _ ♀ F Q m _	[   ♀FQm ]
+Box  7: _ _ F R … o _ _	[  FR…o  ]
+Box  8: _ x G ? n _ _ _	[ xG?n   ]
+Box  9: ? G ? n ’ F Q m	[?G?n’FQm]
+Box 10: _ _ _ l R … o _	[   lR…o ]
+Box 11: _ _ c U ? n _ _	[  cU?n  ]
+Box 12: _ ” F Q m _ _ _	[ ”FQm   ]
+Box 13: _ _ _ … _ _ _ _	[   …    ]
 
 =============== CODE 3 ===============
 
@@ -194,7 +196,7 @@ Box 13: _ _ _ … _ _ _ _	[   …    ]
 If you entered all the codes correctly, your BOX 10 slot 19 should contain a bad egg,
 and no other slot should have been corrupted.
 
-If it is the case, just move the bad egg to the last slot of BOX 14, and you are done.
+If it is the case, you are almost done. Just move the bad egg to the slot 29 of BOX 14 and ensure the slot 30 of BOX 14 (the last slot) is empty.
 Note that the certificate exit code bootstrap must always be placed at least two slots before the hexadecimal-writer bad egg when using it.
 
 When you don't want to use the hexadecimal-writer bad egg (if you just want to execute a standard ACE code for instance), just move it before the last row of BOX 11 and it will not be executed.
@@ -203,8 +205,8 @@ When you don't want to use the hexadecimal-writer bad egg (if you just want to e
 
 Save your game and try executing the hexadecimal-writer bad egg (no need to rename the boxes for now, we just want to check if the execution crashes or not). It should have written some data (most likely interpreted as a bad egg) in the slot just before the hex-writer. If it crashes or does not write any data, then you probably made a mistake in one of the codes earlier. In this case, please refer to the appendix.
 
-If it does not crash and seems to write some data in the BOX 14 slot 29, then it is most likely working.
-Nevertheless, if you want to fully test your setup, you can empty the BOX 14 slot 29, enter the following box names and execute the hex-writer.
+If it does not crash and seems to write some data in the BOX 14 slot 28, then it is most likely working.
+Nevertheless, if you want to fully test your setup, you can empty the BOX 14 slot 28, enter the following box names and execute the hex-writer:
 
 ```
 Box  1: 00000000
@@ -219,7 +221,7 @@ Box  9: 01000000
 Boxes 10-14: 00000000
 ```
 
-Your BOX 14 slot 29 should now contain a shiny Bulbasaur with the name *Charles*.
+Your BOX 14 slot 28 should now contain a shiny Bulbasaur with the name *Charles*.
 
 ## Advanced use
 
@@ -234,10 +236,10 @@ skip the last byte, you should fill the end of the box name with spaces if that 
 
 For information, here is the hexadecimal data corresponding to the bad egg:
 ```
-46808FE2
+8A808FE2
+000EB8E8
 02045CE3
-62C04F32
-0090A0E3
+66C04F32
 0910D8E7
 B11051E2
 10109132
@@ -260,7 +262,7 @@ B11051E2
 
 This bad egg will make the hexadecimal writer more convenient to use.
 
-One issue with the hexadecimal writer bad egg is that it always writes in bytes 0-56 of the BOX 14 slot 29. Thus, it is not possible to write data in the bytes 56-80 of a slot.
+One issue with the hexadecimal writer bad egg is that it always writes in bytes 0-56 of the BOX 14 slot 28. Thus, it is not possible to write data in the bytes 56-80 of a slot.
 
 The crafting table bad egg will change this behavior: it will define an area of 30 slots (starting in the slot just after the location of this bad egg) such that:
 - The location of a write will be the first location 4-bytes aligned in the crafting table area that contains 56 consecutives bytes 00. It means that, assuming the data you write does not end with multiple 00, your first write will be performed in bytes 0-56 of the first slot, then your next write will be performed in bytes 56-80 of the first slot and bytes 0-32 of the second slot, etc.
@@ -285,7 +287,7 @@ Box 13: 09F08FE0
 Box 14: 74090000
 ```
 
-A bad egg should appear in BOX 14 slot 29. In order for it to be active, you can place it anywhere after the Thumb->ARM bootstrap (or the ARM entry point of your ACE setup). It does not need to be after the certificate exit code bootstrap as it does not use any exit code. As the 30 slots following this bad egg will be skipped when triggering ACE, you should put it at least 30 slots before the certificate exit code bootstrap (or any data that you want to be executed).
+A bad egg should appear in BOX 14 slot 28. In order for it to be active, you can place it anywhere after the Thumb->ARM bootstrap (or the ARM entry point of your ACE setup). It does not need to be after the certificate exit code bootstrap as it does not use any exit code. As the 30 slots following this bad egg will be skipped when triggering ACE, you should put it at least 30 slots before the certificate exit code bootstrap (or any data that you want to be executed).
 
 We recommand placing it in BOX 12 slot 9 as you will need to place it there if you want to setup the binary editor and the save hack that allows it to persist after a restart.
 
@@ -311,7 +313,7 @@ E  -  -  -  -  -
 -  -  -  -  -  -
 -  -  -  -  -  -
 -  -  -  -  -  -
--  -  -  -  -  W
+-  -  -  -  W  -
 
 -: Empty slot
 A: Thumb->ARM bootstrap (if any)
@@ -369,10 +371,10 @@ For that, do the following:
 
 ```
 N.  Attack:         Defense:
-1.  32838           57999
-2.  1026            58204
-3.  49250           12879
-4.  36864           58272
+1.  32906           57999
+2.  3584            59576
+3.  1026            58204
+4.  49254           12879
 5.  4105            59352
 6.  4273            57937
 7.  4112            12945
@@ -393,4 +395,4 @@ N.  Attack:         Defense:
 
 Once you've done that, we recommend reloading your save. Now, you can determine which ones of the 10 codes you should reexecute in order to fix your hex-writer. For every iteration that was not matching the table above, you should reexecute the code `(N-1)/2 + 1`. For instance, if the iterations `5` and `6` were not matching, you have to reexecute the code 3 (because `(5-1)/2 + 1 = 3` and `(6-1)/2 + 1 = 3`).
 
-When this is done, you can put your hex-writer in the last slot of BOX 14 and try it again.
+When this is done, you can put your hex-writer in the slot 29 of BOX 14 and try it again.
