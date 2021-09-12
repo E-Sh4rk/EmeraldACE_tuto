@@ -1,4 +1,4 @@
-**The bad eggs created in this tutorial should not be moved in your party: it could corrupt them.**
+**The bad eggs created in this tutorial should not be marked or moved in your party: it could corrupt them.**
 
 # Hexadecimal-writer bad egg
 
