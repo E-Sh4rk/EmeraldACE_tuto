@@ -1,10 +1,10 @@
+**THIS TUTORIAL IS NOT FINISHED YET. WORK IN PROGRESS.**
+
 **The bad eggs created in this tutorial should not be marked or moved in your party: it could corrupt them.**
 
 # Hexadecimal editor
 
-In this tutorial, we will implement an hexadecimal editor inside the box storage. We will then be able to execute it with a single ACE code.
-
-In a next tutorial, we will see how we can hack the game so that the hexadecimal editor can be executed automatically by pressing L+R, even after a save/reset.
+In this tutorial, we will implement an hexadecimal editor inside the box storage. We will then implement a hack that will make the hex editor start by pressing L+R. This hack will be persistent (it will stay after a save/reset), but you will be able to enable/disable it when you want.
 
 **Credits:** This tutorial is an adapation of [this article on Hatena Blog](https://bzl.hatenablog.com/entry/2019/09/29/182642). Credits for the implementation of the hexadecimal editor goes to the author of this article. For my part, I analyzed and brought some minor changes to the implementation so that it can work within the English version.
 
@@ -15,7 +15,7 @@ In a next tutorial, we will see how we can hack the game so that the hexadecimal
 - A [certificate exit code bootstrap](exit-code.md) (you can place it in the first slot of BOX 14 for instance). Note that it does not matter if you have renamed your BOX 14 as the creation of this bad egg uses the hexadecimal-writer bad egg
 - The [hexadecimal-writer and crafting table bad eggs](hex-writer.md)
 
-## Let's go
+## Implementation of the hex editor
 
 NOTE: the codes given here are for the english version. I have not written the codes for the other versions yet.
 
@@ -375,10 +375,13 @@ Box 9:  00 E0 AA AA
 Box 10: FF 00 FC 15
 ```
 
-## Starting the hex editor
+## Implementation of the save hack
 
 Soon.
 
+## Enabling/Disabling it
+
+Soon.
 
 ## Appendix: in case of failure
 
