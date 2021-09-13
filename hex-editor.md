@@ -1,5 +1,3 @@
-**THIS TUTORIAL IS NOT FINISHED YET. WORK IN PROGRESS.**
-
 **The bad eggs created in this tutorial should not be marked or moved in your party: it could corrupt them.**
 
 # Hexadecimal editor
@@ -609,6 +607,75 @@ H: Hexadecimal editor bad eggs
 
 Indeed, when the launcher is active, this row becomes the entry point of a glitched object action associated with your character. It means that each time your character is refreshed (when closing the Pokedex, when entering in a building, etc), the content of this row is executed (we want it to be empty so that the first thing to be executed is the launcher).
 
+**How to use it:**
+- Press L+R to open the hex editor
+- The 4 first bytes represent the address, the last one the value
+- Choose the desired address, and then you can modify the value and press A to confirm the modification
+- L and R can be used to change the value by 0x10
+- Press B to exit the hexadecimal editor
+
 ## Appendix: in case of failure
 
-Soon.
+In order to check that the data in your bad eggs is correct, we will use a special bad egg that computes a checksum of the 6 following slots and store it in the attack and defense stats of the second pokemon in your team. Before going further, don't forget to deactivate the launcher (or reload your save)!
+
+First, generate the following bad egg with your hex-writer:
+
+```
+Box  1: 46808FE2
+Box  2: 1E9E88E2
+Box  3: 00C0A0E3
+Box  4: 04B098E4
+Box  5: 000000FF
+Box  6: 0BC08CE0
+Box  7: 090058E1
+Box  8: 18F04F32
+Box  9: 0AB09FE5
+Box 10: BAC5CBE1
+Box 11: 2CC8A0E1
+Box 12: BCC5CBE1
+Box 13: 10FF2FE1
+Box 14: 50450202
+```
+
+Now, move your exit code bootstrap and the bad egg just created in the following positions:
+
+```
+BOX 13:
+H  H  H  H  H  H
++  M  M  S  -  -
+E  -  -  -  -  C
+x  x  x  x  x  x
+-  -  -  -  -  -
+
+-: Empty slot
++: Area of the crafting table
+H: Hexadecimal editor bad eggs
+M: Mewtwo/Mew
+S: Summon spot (see explanation below)
+E: Exit code bootstrap
+C: Checksum bad egg
+x: Position where you will put the bad eggs to check
+```
+
+Leave the `x` slots empty for now and trigger ACE. The second pokemon of your party should
+now have an attack and defense of 0 (it does not work if the second pokemon of your party is deoxys).
+
+If it is the case, then we can proceed to the verification of your bad eggs.
+You will have to move one of the groups of bad eggs indicated below in the row with the `x` slots
+(from left to right). Then, just trigger ACE and compare the value of attack and defense stats with the ones given.
+Then, move your group of bad eggs back into their original position and proceed to the test of the next group.
+
+```
+Group             Attack  Defense
+Launcher 1-2      4269    14203
+Launcher 3-4      27183   14177
+
+Hex editor 1-3    59215   52963
+Hex editor 4-6    14453   33968
+Hex editor 7-9    43544   3083
+Hex editor 10-12  53719   10227
+```
+
+NOTE: The checksum does not take the order into account, so take care not to change the relative order of the bad eggs otherwise it will be difficult to notice and to find the right order again!
+
+If you have different values for some groups, then you should throw away the corresponding bad eggs and create them again.
