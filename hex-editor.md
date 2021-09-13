@@ -4,7 +4,7 @@
 
 # Hexadecimal editor
 
-In this tutorial, we will implement an hexadecimal editor inside the box storage. We will then implement a hack that will make the hex editor start by pressing L+R. This hack will be persistent (it will stay after a save/reset), but you will be able to enable/disable it when you want.
+In this tutorial, we will implement an hexadecimal editor inside the box storage. We will then implement a launcher that will make the hex editor start by pressing L+R. This hack will be persistent (it will stay after a save/reset), but you will be able to enable/disable it when you want.
 
 **Credits:** This tutorial is an adapation of [this article on Hatena Blog](https://bzl.hatenablog.com/entry/2019/09/29/182642). Credits for the implementation of the hexadecimal editor goes to the author of this article. For my part, I analyzed and brought some minor changes to the implementation so that it can work within the English version.
 
@@ -375,13 +375,239 @@ Box 9:  00 E0 AA AA
 Box 10: FF 00 FC 15
 ```
 
-## Implementation of the save hack
+## Implementation of the launcher
 
-Soon.
+Now, we have to implement the launcher that will allow us to execute the hex editor by pressing L+R.
+
+It requires the creation of 4 bad eggs (8 codes). We will put it just above the hex-editor bad eggs:
+
+```
+BOX 12:
+-  -  -  -  -  -
+A  -  C  +  +  +
++  +  +  +  +  +
+L  L  L  L  +  +
+H  H  H  H  H  H
+
+BOX 13:
+H  H  H  H  H  H
++  +  +  -  -  -
+-  -  -  -  -  -
+-  -  -  -  -  -
+-  -  -  -  -  -
+
+-: Empty slot
+A: Thumb->ARM bootstrap (if any)
+C: Crafting table bad egg
++: Area of the crafting table
+L: Launcher bad eggs
+H: Hexadecimal editor bad eggs
+```
+
+The procedure is the same as for the implementation of the hex editor. As there are 8 codes this time, we recommend you to proceed by batches of 4 codes.
+
+```
+=============== CODE 1 ===============
+
+Box 1:  F0 B4 04 1C
+Box 2:  29 48 01 38
+Box 3:  01 78 00 29
+Box 4:  47 D1 01 21
+Box 5:  00 E0 AA AA
+Box 6:  01 70 41 1C
+Box 7:  26 4A 26 A0
+Box 8:  10 44 20 31
+Box 9:  78 22 92 00
+Box 10: 00 E0 AA AA
+
+=============== CODE 2 ===============
+
+Box 1:  0B DF 20 48
+Box 2:  22 49 02 1C
+Box 3:  00 E0 AA AA
+Box 4:  21 32 89 23
+Box 5:  9B 00 03 33
+Box 6:  00 E0 AA AA
+Box 7:  02 25 2E C0
+Box 8:  1D 48 1E 49
+Box 9:  00 E0 AA AA
+Box 10: 1E 4A 1F 4B
+
+=============== CODE 3 ===============
+
+Box 1:  20 4D 21 4E
+Box 2:  22 4F EE C0
+Box 3:  22 49 24 4A
+Box 4:  24 4B 25 4D
+Box 5:  00 E0 AA AA
+Box 6:  24 4E 25 4F
+Box 7:  EE C0 26 49
+Box 8:  26 4A 27 4B
+Box 9:  27 4E F4 25
+Box 10: 00 E0 AA AA
+
+=============== CODE 4 ===============
+
+Box 1:  AD 19 80 27
+Box 2:  BF 00 01 37
+Box 3:  00 E0 AA AA
+Box 4:  EE C0 09 49
+Box 5:  03 31 23 4A
+Box 6:  00 E0 AA AA
+Box 7:  22 4B 0E C0
+Box 8:  09 48 23 49
+Box 9:  00 E0 AA AA
+Box 10: 08 60 F0 BC
+
+=============== CODE 5 ===============
+
+Box 1:  20 1C 01 49
+Box 2:  08 47 00 00
+Box 3:  99 A9 08 08
+Box 4:  00 D0 03 02
+Box 5:  00 E0 AA AA
+Box 6:  2C 01 00 00
+Box 7:  28 30 00 23
+Box 8:  00 E0 03 02
+Box 9:  0F 00 A0 E1
+Box 10: 00 E0 AA AA
+
+=============== CODE 6 ===============
+
+Box 1:  05 00 80 E2
+Box 2:  10 FF 2F E1
+Box 3:  00 E0 AA AA
+Box 4:  0A 48 40 78
+Box 5:  03 21 88 42
+Box 6:  00 E0 AA AA
+Box 7:  0B D1 09 4B
+Box 8:  1B 78 01 2B
+Box 9:  00 E0 AA AA
+Box 10: 07 D0 08 4B
+
+=============== CODE 7 ===============
+
+Box 1:  00 20 18 60
+Box 2:  D8 60 07 48
+Box 3:  98 60 07 48
+Box 4:  18 61 07 48
+Box 5:  00 E0 AA AA
+Box 6:  6E 21 81 71
+Box 7:  06 4B 18 47
+Box 8:  EC 22 00 03
+Box 9:  38 0E 00 03
+Box 10: 00 E0 AA AA
+
+=============== CODE 8 ===============
+
+Box 1:  50 73 03 02
+Box 2:  50 27 00 03
+Box 3:  00 E0 AA AA
+Box 4:  FC 7F 00 03
+Box 5:  00 00 00 00
+Box 6:  00 00 00 00
+Box 7:  00 00 00 00
+Box 8:  00 00 00 00
+Box 9:  00 00 00 00
+Box 10: 00 00 00 00
+```
 
 ## Enabling/Disabling it
 
-Soon.
+You're almost there! Now that we have the hex editor and the launcher, we just need a way to activate it. For that, let's invoke the power of Mewtwo.
+
+You can invoke Mewtwo with the crafting table, as usual:
+
+```
+Box  1: 1A 00 9F E5
+Box  2: 00 00 4F E0
+Box  3: 0E C0 9F E5
+Box  4: 00 B0 A0 E3
+Box  5: 00 00 80 E2
+Box  6: 01 B0 4C E5
+Box  7: 10 FF 2F E1
+Box  8: E4 1F 00 00
+Box  9: 00 D0 03 02
+Box 10: 9D 06 00 00
+Box 11: 00 00 00 00
+Box 12: 8C 00 00 00
+Boxes 13-14: 00 00 00 00
+```
+
+Mewtwo should have appeared in your crafting table.
+Now, let's invoke Mew in order to calm him (move Mewtwo in the next slot of the crafting table, otherwise the data of Mew will be appended to the data of Mewtwo).
+
+```
+Box  1: 1A C0 9F E5
+Box  2: 12 B0 9F E5
+Box  3: 00 C0 8B E5
+Box  4: 12 B0 9F E5
+Box  5: 45 C0 4C E2
+Box  6: 06 C0 CB E5
+Box  7: 1E FF 2F E1
+Box  8: 7E F3 00 00
+Box  9: FC 7F 00 03 
+Box 10: 50 27 00 03 
+Box 11: 50 73 03 02
+Box 12: 9F 70 00 00
+Boxes 13-14: 00 00 00 00
+```
+
+Perfect! Mewtwo will be used to activate the launcher (when the launcher is active, you can open
+the hexadecimal editor just by pressing L+R). In the other hand, Mew has the power to disable it.
+
+We recommend you to put your Mew and Mewtwo in this location:
+
+```
+BOX 13:
+H  H  H  H  H  H
++  M  M  S  -  -
+-  -  -  -  -  -
+-  -  -  -  -  -
+-  -  -  -  -  -
+
+-: Empty slot
++: Area of the crafting table
+H: Hexadecimal editor bad eggs
+M: Mewtwo/Mew
+S: Summon spot (see explanation below)
+```
+
+Before I explain how to activate the launcher, you should save your game. **DO NOT SAVE YOUR GAME AFTER HAVING ACTIVATED THE LAUNCHER** (we must do some tests before).
+
+When you want to activate the launcher, just move Mewtwo in the *Summon Spot* and trigger ACE (you can then move Mewtwo back in its original place). Same thing with Mew when you want to deactivate it.
+
+Before being allowed to save, you should activate the launcher and test the following things:
+- Press L+R while in the overworld. It should open the hex editor and you shouldn't be able to move your character.
+- Press B. It should close the hex editor (though the window does not disappear immediately due to a refreshing issue) and you should be able to move your character.
+- Open and close your pokedex, inventory, bag, etc. It shouldn't crash.
+- Fly in another city, enter in some houses, etc. It shouldn't crash.
+- Enter in a Pokemon Center, open your PC, move Mew in the Summon Spot.
+- Trigger ACE in order to disable the launcher. Pressing L+R should not open the hex editor anymore.
+
+These tests are here to ensure that you will not be softlocked (as the launcher stays active after a save/reset). If all the tests succeeded, then well done, you succeed! You can now save your game even with the launcher active.
+If some tests failed, you should refer to the appendix.
+
+**IMPORTANT:** When the launcher is active, the following row of your crafting table area should be left empty:
+
+```
+BOX 12:
+-  -  -  -  -  -
+A  -  C  +  +  +
+x  x  x  x  x  x
+L  L  L  L  +  +
+H  H  H  H  H  H
+
+-: Empty slot
+A: Thumb->ARM bootstrap (if any)
+C: Crafting table bad egg
++: Area of the crafting table
+x: SLOTS THE MUST REMAIN EMPTY
+L: Launcher bad eggs
+H: Hexadecimal editor bad eggs
+```
+
+Indeed, when the launcher is active, this row becomes the entry point of a glitched object action associated with your character. It means that each time your character is refreshed (when closing the Pokedex, when entering in a building, etc), the content of this row is executed (we want it to be empty so that the first thing to be executed is the launcher).
 
 ## Appendix: in case of failure
 
