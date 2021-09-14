@@ -8,8 +8,7 @@ In this tutorial, we will implement an hexadecimal editor inside the box storage
 
 ## Prerequisite
 
-- An ACE glitch species (for instance 0x40E9 for the english version)
-- If you use a glitch species that executes Thumb code such as 0x40E9, you will also need a Thumb->ARM bootstrap
+- A stable ACE glitch species such as [0x40E9](stable-ace.md) (with its Thumb->ARM bootstrap)
 - A [certificate exit code bootstrap](exit-code.md) (you can place it in the first slot of BOX 14 for instance). Note that it does not matter if you have renamed your BOX 14 as the creation of this bad egg uses the hexadecimal-writer bad egg
 - The [hexadecimal-writer and crafting table bad eggs](hex-writer.md)
 
@@ -573,7 +572,7 @@ S: Summon spot (see explanation below)
 
 Before I explain how to activate the launcher, you should save your game. **DO NOT SAVE YOUR GAME AFTER HAVING ACTIVATED THE LAUNCHER** (we must do some tests before).
 
-When you want to activate the launcher, just move Mewtwo in the *Summon Spot* and trigger ACE (you can then move Mewtwo back in its original place). Same thing with Mew when you want to deactivate it.
+When you want to activate the launcher, just move Mewtwo in the *Summon Spot* and trigger ACE (it will not open the Pokedex completion diploma, you have to exit the summary screen yourself). You can then move Mewtwo back in its original place. Same thing with Mew when you want to deactivate it.
 
 Before being allowed to save, you should activate the launcher and test the following things:
 - Press L+R while in the overworld. It should open the hex editor and you shouldn't be able to move your character.

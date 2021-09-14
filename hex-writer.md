@@ -14,8 +14,7 @@ As there are 14 boxes, each box name is 8 characters long and a byte is describe
 
 ## Prerequisite
 
-- An ACE glitch species (for instance 0x40E9 for the english version). Unstable species such as 0x611 are not recommended (you will loose a lot of time hatching them)
-- If you use a glitch species that executes Thumb code such as 0x40E9, you will also need a Thumb->ARM bootstrap
+- A stable ACE glitch species such as [0x40E9](stable-ace.md) (with its Thumb->ARM bootstrap)
 - A [certificate exit code bootstrap](exit-code.md) (you can place it in the first slot of BOX 14 for instance, and if you have renamed your BOX 14 since the creation of the bootstrap, don't forget to restore it with the code [`Restore 'BX r0' in box 14 name`](https://e-sh4rk.github.io/EmeraldACE_web/))
 
 ## Let's go

@@ -6,8 +6,7 @@ most of the *exit code* part when writing ACE codes in the box names
 
 ## Prerequisite
 
-- An ACE glitch species (for instance 0x40E9 for the english version). Unstable species such as 0x611 are not recommended (you will loose a lot of time hatching them)
-- If you use a glitch species that executes Thumb code such as 0x40E9, you will also need a Thumb->ARM bootstrap
+- An ACE glitch species such as 0x611 or [0x40E9](stable-ace.md). Stable species such as 0x40E9 are strongly recommended (way faster to trigger)
 
 ## Let's go
 
