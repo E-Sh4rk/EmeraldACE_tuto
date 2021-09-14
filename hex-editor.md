@@ -516,18 +516,18 @@ You're almost there! Now that we have the hex editor and the launcher, we just n
 You can invoke Mewtwo with the crafting table, as usual:
 
 ```
-Box  1: 1A 00 9F E5
-Box  2: 00 00 4F E0
-Box  3: 0E C0 9F E5
-Box  4: 00 B0 A0 E3
-Box  5: 00 00 80 E2
-Box  6: 01 B0 4C E5
-Box  7: 10 FF 2F E1
-Box  8: E4 1F 00 00
-Box  9: 00 D0 03 02
-Box 10: 9D 06 00 00
+Box  1: 1A C0 9F E5
+Box  2: 00 B0 A0 E3
+Box  3: 01 B0 4C E5
+Box  4: 0A C0 9F E5
+Box  5: 6E B0 8B E2
+Box  6: 06 B0 CC E5
+Box  7: 1E FF 2F E1
+Box  8: D2 DB 00 00
+Box  9: 50 73 03 02
+Box 10: 00 D0 03 02
 Box 11: 00 00 00 00
-Box 12: 8C 00 00 00
+Box 12: 8C 70 00 00
 Boxes 13-14: 00 00 00 00
 ```
 
