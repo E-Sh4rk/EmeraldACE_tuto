@@ -286,9 +286,9 @@ Box 13: 09F09FE0
 Box 14: 74090000
 ```
 
-A bad egg should appear in BOX 14 slot 28. In order for it to be active, you can place it anywhere after the Thumb->ARM bootstrap (or the ARM entry point of your ACE setup). It does not need to be after the certificate exit code bootstrap as it does not use any exit code. As the 30 slots following this bad egg will be skipped when triggering ACE, you should put it at least 30 slots before the certificate exit code bootstrap (or any data that you want to be executed).
+A bad egg should appear in BOX 14 slot 28. In order for it to be active, you can place it anywhere after the Thumb->ARM bootstrap (or the ARM entry point of your ACE setup). It does not need to be after the certificate exit code bootstrap as it does not use any exit code. As the 30 slots following this bad egg will be skipped when triggering ACE, you should put it at least 31 slots before the certificate exit code bootstrap (or any data that you want to be executed).
 
-We recommand placing it in BOX 12 slot 9 as you will need to place it there if you want to setup the binary editor and the save hack that allows it to persist after a restart.
+We recommend placing it in BOX 12 slot 9 as you will need to place it there if you want to setup the binary editor and the save hack that allows it to persist after a restart.
 
 If you follow our advice, you boxes should look like that:
 
