@@ -14,7 +14,7 @@ The *freezer bad egg* is a bad egg that can be used to run any piece of code eac
 
 NOTE: the codes given here are for the english version. The freezer itself should also work on other european versions (not tested yet), but the code you want to execute each frame must be adapted to your version.
 
-Ensure the first two slots of your crafting table area are empty, and execute the hexadecimal-writer bad egg two times **without looking at BOX 12** (or where your crafting table area is) between the execution of the two codes:
+Ensure the first two slots of your crafting table area are empty, and execute the hexadecimal-writer bad egg with these 2 codes **without looking at BOX 12** (or where your crafting table area is) between the execution of the two codes:
 
 ```
 =============== CODE 1 ===============

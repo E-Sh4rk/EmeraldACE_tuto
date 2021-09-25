@@ -322,21 +322,7 @@ E: Exit code bootstrap
 W: Hexadecimal writer bad egg
 ```
 
-## Example of use: creating any Pokemom from scratch
-
-You can use the hexadecimal-writer bad egg together with the crafting table in order to write the data of the Pokemon you want. It will take you only 2 codes!
-
-1. First, you have to determine the hexadecimal data of the Pokemon you want. You can use [PokeGlitzer](https://github.com/E-Sh4rk/PokeGlitzer) for that (or if you prefer, you can use PkHex to generate the Pokemon you want, save it into a *.sav* file and open it in PokeGlitzer in order to view the hexadecimal data of the Pokemon).
-
-2. Once you know the data to write, please ensure your boxes 12-14 match the setup recommended above (or something equivalent), check that the two first slots of your crafting table are empty, and start writing the hexadecimal data in the box names. Stop after 40 bytes (half of the Pokemon data): you should have reached BOX 11. Fill the remaining boxes (11-14) with `00000000`.
-   
-3. Select BOX 1, exit the PC and trigger ACE.
-   
-4. Now, go back into your PC and fill again the boxes 1-10 with the remaining data **without looking at BOX 12** (or where your crafting table area is). As your Pokemon data is not fully written yet, viewing it in the PC would turn it into a bad egg due to a wrong checksum.
-
-5. Once you've filled the boxes 1-10 with the remaining data, exit the PC and trigger ACE again. That's it, your Pokemon is waiting you in the first slot of the crafting table!
-
-*NOTE: if the first half (40 bytes) of your Pokemon data ends with the bytes `00 00 00 00` (it can happen if your Pokemon has no experience and has a PID equal to its OTID), then the second write will start 4 bytes earlier. In order to compensate that, you must start the second code by `00000000` (and write the second half of the data in the boxes 2-11).*
+Your crafting table can be used for many things, for instance see [how to generate a Pokemon with it](generating-pkmn.md).
 
 # Appendix: in case of failure
 

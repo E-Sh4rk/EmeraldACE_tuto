@@ -4,6 +4,7 @@ Summary:
 - [Stable ACE with 0x40E9](stable-ace.md)
 - [Certificate exit code bootstrap](exit-code.md)
 - [Hexadecimal writer and crafting table](hex-writer.md)
+- [Generating Pokemons with the crafting table](generating-pkmn.md)
 - [Freezer bad egg (to run code at each frame)](freezer.md)
 - [Walk through walls (require freezer)](walk-through-walls.md)
 - [Hexadecimal editor](hex-editor.md)
