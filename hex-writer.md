@@ -324,6 +324,8 @@ W: Hexadecimal writer bad egg
 
 Your crafting table can be used for many things, for instance see [how to generate a Pokemon with it](generating-pkmn.md).
 
+NOTE: you do not need to move your crafting table or its content when you want to execute standard ACE codes. It will not interfere with the execution of standard ACE codes, so you can leave it there. Only the hexadecimal-writer should be moved somewhere before the last row of BOX 11 when you want to execute standard ACE codes.
+
 # Appendix: in case of failure
 
 You should only refer to this section if, after entering the 10 codes for creating the hex-writer, it does not seem to work (either it crashes or it does not write any data).
