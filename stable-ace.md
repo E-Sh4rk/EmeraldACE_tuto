@@ -32,7 +32,7 @@ Box 14: _ _ _ _ _ _ … _	[      … ]
 
 Now, hatch a 0x611 egg in order to trigger ACE. Don't forget to clone your 0x611 egg if it's your last copy (in case you would need to hatch another one in the future). Reminder: the last row of your box 11 as well as your boxes 12-14 must be empty (or only contain Pokemons specifically designed for ACE) when executing ACE.
 
-It should open the Pokedex completion diploma, and a decamark should have appeared in your BOX 10 slot 19 (this is your 0x40E9 species). Leave it there for now. You can save the game if you want.
+It should open the Pokedex completion diploma, and a decamark should have appeared in your BOX 10 slot 19 (this is your 0x40E9 species). Leave it there for now. Its species name should look like this: ` ÓàÉ LvLv`. If it is the case, you can save the game if you want.
 
 Now, before being able to use it, we have to create the Thumb->ARM bootstrap.
 Catch any Pokemon and name it `x♂zN 6FFxC`, then put it in your BOX 10 slot 20 (just after the newly created decamark). Then, write these box names (do not change the name of your BOX 14, the previous code should have renamed it `Œ` and you have to leave this name for this code):
