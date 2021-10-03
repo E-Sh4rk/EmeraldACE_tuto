@@ -380,6 +380,8 @@ N.  Attack:         Defense:
 20. 65296           57647
 ```
 
+NOTE: if you missed a step and want to restart from step 1, just move a Pokemon in the last slot of box 14 and move it back in its original location (in order to erase the data there).
+
 Once you've done that, we recommend reloading your save. Now, you can determine which ones of the 10 codes you should reexecute in order to fix your hex-writer. For every iteration that was not matching the table above, you should reexecute the code `(N-1)/2 + 1`. For instance, if the iterations `5` and `6` were not matching, you have to reexecute the code 3 (because `(5-1)/2 + 1 = 3` and `(6-1)/2 + 1 = 3`).
 
 When this is done, you can put your hex-writer in the slot 29 of BOX 14 and try it again.
