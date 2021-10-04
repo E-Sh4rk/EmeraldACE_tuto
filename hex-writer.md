@@ -202,7 +202,7 @@ When you don't want to use the hexadecimal-writer bad egg (if you just want to e
 
 ## Testing everything worked
 
-Save your game and try executing the hexadecimal-writer bad egg (no need to rename the boxes for now, we just want to check if the execution crashes or not). It should have written some data (most likely interpreted as a bad egg) in the slot just before the hex-writer. If it crashes or does not write any data, then you probably made a mistake in one of the codes earlier. In this case, please refer to the appendix.
+Save your game and try executing the hexadecimal-writer bad egg (for that, just execute ACE as usual, with your hexadecimal-writer bad egg in the slot 29 of BOX 14). No need to rename the boxes for now, we just want to check if the execution crashes or not. It should have written some data (most likely interpreted as a bad egg) in the slot just before the hex-writer. If it crashes or does not write any data, then you probably made a mistake in one of the codes earlier. In this case, please refer to the appendix.
 
 If it does not crash and seems to write some data in the BOX 14 slot 28, then it is most likely working.
 Nevertheless, if you want to fully test your setup, you can empty the BOX 14 slot 28, enter the following box names and execute the hex-writer:
