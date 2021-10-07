@@ -572,7 +572,7 @@ S: Summon spot (see explanation below)
 
 Before I explain how to activate the launcher, you should save your game. **DO NOT SAVE YOUR GAME AFTER HAVING ACTIVATED THE LAUNCHER** (we must do some tests before).
 
-When you want to activate the launcher, just move Mewtwo in the *Summon Spot* and trigger ACE (it will not open the Pokedex completion diploma, you have to exit the summary screen yourself). You can then move Mewtwo back in its original place. Same thing with Mew when you want to deactivate it.
+When you want to activate the launcher, just move Mewtwo in the *Summon Spot* and trigger ACE. It will not open the Pokedex completion diploma, you have to exit the summary screen yourself quickly. You can then move Mewtwo back in its original place. Same thing with Mew when you want to deactivate it.
 
 Before being allowed to save, you should activate the launcher and test the following things:
 - Press L+R while in the overworld. It should open the hex editor and you shouldn't be able to move your character.
