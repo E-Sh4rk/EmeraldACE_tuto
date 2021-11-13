@@ -65,7 +65,7 @@ Box  9: 9C700000
 Boxes 10-14: 00000000
 ```
 
-It will generate an Articuno in the second slot of the crafting table. This Articuno contains the code that will be executed each frame by the freezer. Now, move the freezer in BOX 14 slot 3 and the Articuno in BOX 14 slot 4 (or somewhere else depending on where you put your exit code bootstrap: it should be at least 2 slots after the exit code bootstrap).
+It will generate an Articuno in the second slot of the crafting table. This Articuno contains the code that will be executed each frame by the freezer. Now, move the freezer in your BOX 14 slot 3 (or somewhere else depending on where you put your exit code bootstrap: it should be at least 2 slots after the exit code bootstrap) and the Articuno in the slot just after.
 
 Now, trigger the ACE and observe the world: the NPCs should always do the same moves, there should be no wild Pokemon in the grass, etc. Trigger the ACE again: everything should be back to normal.
 
