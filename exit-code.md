@@ -48,7 +48,7 @@ Box  3: _ _ k N ? n _ _	[  kN?n  ]
 Box  4: _ _ F ! q _ _ _	[  F!q   ]
 Box  5: F ‘ ! n r H … o	[F‘!nrH…o]
 Box  6: _ _ _ f G ? n _	[   fG?n ]
-Box  7: _ _ 8 M ? n _ _	[  8M?n  ]
+Box  7: _ _ 0 M ? n _ _	[  0M?n  ]
 Box  8: _ E P ? n _ _ _	[ EP?n   ]
 Box  9: _ F ! q … ” ! n	[ F!q…”!n]
 Box 10: _ _ _ z P – n _	[   zP–n ]
@@ -57,7 +57,7 @@ Box 12: _ 1 R ? n _ _ _	[ 1R?n   ]
 Box 13: T _ ? n _ _ ! q	[T ?n  !q]
 ```
 
-That's it. The decamark should now have the name `Á q:·n`.
+That's it. The decamark should now have the name `Á q:n`.
 You should now move it somewhere after the Thumb->ARM bootstrap (or the ARM entry point of your ACE setup), but not in the last slot of BOX 14.
 You can put it in the first slot of BOX 14 for instance.
 
