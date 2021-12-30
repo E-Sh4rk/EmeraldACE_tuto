@@ -1,3 +1,5 @@
+*UPDATE: The HeXecutor has been updated on 2021/12/30 in order to fix an issue on console.*
+
 **The Pokemon created in this tutorial should not be marked or moved in your party: it could corrupt it.**
 
 # HeXecutor
@@ -17,18 +19,18 @@ NOTE: the codes given here are for the english version. However, it should also 
 If you have a crafting table, ensure the first two slots of your crafting table area are empty. Otherwise, ensure the slot preceding your hexadecimal writer is empty. Then, execute the hexadecimal-writer bad egg with this code (the spaces are just for readability):
 
 ```
-Box  1: 0E C0 9F E5
-Box  2: 04 00 8C E4
-Box  3: 0E 00 9F E5
-Box  4: 04 00 8C E4
-Box  5: 04 00 4C E2
-Box  6: 08 F0 8F E2
-Box  7: 00 FA 03 02
-Box  8: BA 85 00 00
-Box  9: 0C 00 1F E5
-Box 10: 2E 20 4F E2
-Box 11: 20 F0 8F E2
-Box 12: 6D C0 00 00
+Box  1: 0A 80 4F E2
+Box  2: 01 01 2D E9
+Box  3: 02 00 9F E5
+Box  4: 02 C0 9F E5
+Box  5: 0C F0 8F E2
+Box  6: 00 FA 03 02
+Box  7: 03 00 BD E8
+Box  8: 13 25 00 00
+Box  9: 6C 81 00 00
+Box 10: 00 C0 80 E5
+Box 11: 04 C0 80 E2
+Box 12: 1C F0 8F E2
 Box 13: 00 00 00 00
 Box 14: 00 00 00 00
 ```
@@ -47,6 +49,6 @@ and triggering ACE: it should open the Pokedex completion diploma (or whichever 
 Here are some notes about the execution:
 - The code will not be executed from the box names location as usual, but from the address
 `0203FA08`. You should take that into account when doing PC-relative operations.
-- The register `r2` will contain the address of the HeXecutor data (useful to compute ASLR-dependent addresses)
-- Your code should end with a `bx r0` instruction.
+- The register `r1` will contain the address of the HeXecutor data (useful to compute ASLR-dependent addresses)
+- Your code should end with a `bx r0`or `bx lr` instruction.
 - The PC register will not be misaligned as it is the case for traditional ACE executions.
