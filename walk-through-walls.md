@@ -10,7 +10,7 @@ leave the bounds of the map). In order to enable it, it must be executed each fr
 - A stable ACE glitch species such as [0x40E9](stable-ace.md) (with its Thumb->ARM bootstrap)
 - A [certificate exit code bootstrap](exit-code.md) (you can place it in the first slot of BOX 14 for instance). Note that it does not matter if you have renamed your BOX 14 as the creation of this bad egg uses the hexadecimal-writer bad egg
 - The [hexadecimal-writer and crafting table bad eggs](hex-writer.md)
-- The [freezer bad egg](freezer.md)
+- The [freezer bad egg](freezer.md) with the registry-saver Metapod extension
 
 ## Let's go
 

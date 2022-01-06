@@ -89,3 +89,29 @@ Here are some explanations about how to use the freezer bad egg:
 - The code to execute must end with a `BX r0` command.
 It should also preserve the other registers (of course, if you modify `r0`, restore its value before calling `BX r0`). Note that the code will be copied before being executed each frame, so do not expect `PC` to point inside the PC storage.
 - The freezer bad egg works like a toggle that enable/disable the execution on each frame of the provided code. The state of this toggle is not persistent: it will always be disabled after a save and restart.
+
+# Registry-Saver Metapod (optional)
+
+The Registry-Saver Metapod is an extension for the freezer.
+
+This extension will take care of saving and restoring all the registers, so that we do not have to worry about preserving the registers anymore when using the freezer.
+
+It can be made with the following code (using the hexadecimal writer):
+
+```
+Box  1: FF 5F 2D E9
+Box  2: 08 00 8F E2
+Box  3: 04 E0 8F E2
+Box  4: 3C F0 8F E2
+Box  5: 00 00 00 02
+Box  6: FF 5F BD E8
+Box  7: 10 FF 2F E1
+Box  8: 40 AB 00 00
+Box  9: 00 00 00 00
+Box 10: 00 00 00 00
+Box 11: 00 00 00 00
+Box 12: FC 5F 00 00
+Boxes 13-14: 00 00 00 00
+```
+
+It will create a Metapod. This Metapod must be placed just after the Freezer bad egg in order to be effective (you will have the freezer bad egg followed by this Metapod followed by the Pokemons or eggs containing the code you want to execute).

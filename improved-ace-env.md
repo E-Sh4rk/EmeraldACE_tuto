@@ -1,3 +1,5 @@
+**WARNING: DO NOT FOLLOW THIS TUTORIAL YET (NOT READY, WIP)**
+
 **The bad eggs and Pokemons created in this tutorial should not be marked (unless specified otherwise) or moved in your party: it could corrupt them.**
 
 # New ACE environment 
@@ -12,7 +14,7 @@ Finally, in the last (optional) part, we will add some more components to our AC
 - A stable ACE glitch species such as [0x40E9](stable-ace.md) (with its Thumb->ARM bootstrap)
 - A [certificate exit code bootstrap](exit-code.md) (you can place it in the first slot of BOX 14 for instance). Note that it does not matter if you have renamed your BOX 14 as the creation of this bad egg uses the hexadecimal-writer bad egg
 - The [hexadecimal-writer and crafting table bad eggs](hex-writer.md)
-- The [freezer bad egg](freezer.md)
+- The [freezer bad egg](freezer.md) (not required if you just want to update your bootstraps)
 
 ## Updating your bootstraps
 
@@ -100,7 +102,73 @@ You can freely store unused components in the crafting table area (preferably no
 
 ## The ACE trigger bad egg
 
-Soon.
+This purpose of this section is to create a bad egg that, when executed with the freezer, allows to trigger ACE for anywhere just by pressing L+R.
+
+**WARNING: This is NOT compatible with the (deprecated) Hex Editor + Save Hack.
+Please disable your Hex Editor before following this section. An updated setup for the Hex Editor will be coming.**
+
+Before following this section, please ensure you have extended your freezer with the [Registry-Saver Metapod](freezer.md).
+
+This bad egg can be created with 2 codes using the hexadecimal writer. As usual, do not look at the box 12 between the execution of the first code and the execution of the second one, or it will corrupt the data you are writing.
+
+```
+CODE 1:
+
+Box  1: 3C 90 9F E5
+Box  2: B0 A0 D9 E1
+Box  3: 03 AC 0A E2
+Box  4: 03 0C 5A E3
+Box  5: 00 00 00 FF
+Box  6: 04 F0 8F 02
+Box  7: 00 80 A0 E3
+Box  8: 28 80 8F E5
+Box  9: 24 80 9F E5
+Box 10: 01 80 88 E2
+Boxes 11-14: 00 00 00 00
+
+CODE 2:
+
+Box  1: 1C 80 8F E5
+Box  2: 14 90 9F E5
+Box  3: 20 00 58 E3
+Box  4: 19 FF 2F A1
+Box  5: 02 00 58 E3
+Box  6: 19 FF 2F 01
+Box  7: 1E FF 2F E1
+Box  8: EC 22 00 03
+Box  9: FE FE 06 02
+Box 10: 00 00 00 00
+Boxes 11-14: 00 00 00 00
+```
+
+It should create a bad egg. Move the freezer, the metapod extension and this bad egg as follows (their exact location is not important but it must be after the exit code bootstrap):
+
+```
+BOX 14:
+F  M  T  -  -  -
+-  -  -  -  -  -
+-  -  -  -  -  -
+-  -  -  -  -  -
+-  -  - (H)(W) -
+
+-: Empty slot
+F: Freezer (bad egg)
+M: Registry-saver extension (Metapod)
+T: ACE-trigger (bad egg)
+```
+
+Ensure that your exit code bootstrap is marked (the freezer must be executed with the pokedex completion diploma exit code in order to ensure that it will be executed only once).
+
+Trigger ACE by looking at the summary of your stable ACE species (it shouldn't crash).
+Now, the ACE-trigger should be active. You can test it by pressing L+R: it should trigger ACE and thus open the pokedex completion diploma again. As the Freezer is currently active in your ACE setup, it will have as effect to execute it again and this it will disable the ACE-trigger.
+
+If this worked, well done! You can now enable the ACE trigger again (by manually triggering ACE with your stable ACE species), and then you can freely remove the freezer (and the two elements next to it) and execute the ACE you want by pressing L+R :)
+
+For instance, if you've made the walk-through-walls bad eggs, you can just put them somewhere in your box 14 (without the freezer: it is not needed anymore as you can trigger ACE when you want, and even at each frame if you want). Now, when you will maintain L+R pressed, you will be able to walk through walls (don't forget to unmark your exit code bootstrap or it will open the pokedex completion diploma each time).
+
+*NOTE: Pressing L+R succintly will only trigger ACE once. If you press it more than 30 frames, it will start triggering ACE on each frame until you release L+R.*
+
+When you want to disable the ACE-trigger, you can just move the freezer back in its position and trigger ACE, or alternatively you can save and reset.
 
 ## Persistence (optional)
 
