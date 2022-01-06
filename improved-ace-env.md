@@ -1,5 +1,3 @@
-**WARNING: DO NOT FOLLOW THIS TUTORIAL YET (NOT READY, WIP)**
-
 **The bad eggs and Pokemons created in this tutorial should not be marked (unless specified otherwise) or moved in your party: it could corrupt them.**
 
 # New ACE environment 
@@ -164,11 +162,36 @@ Now, the ACE-trigger should be active. You can test it by pressing L+R: it shoul
 
 If this worked, well done! You can now enable the ACE trigger again (by manually triggering ACE with your stable ACE species), and then you can freely remove the freezer (and the two elements next to it) and execute the ACE you want by pressing L+R :)
 
-For instance, if you've made the walk-through-walls bad eggs, you can just put them somewhere in your box 14 (without the freezer: it is not needed anymore as you can trigger ACE when you want, and even at each frame if you want). Now, when you will maintain L+R pressed, you will be able to walk through walls (don't forget to unmark your exit code bootstrap or it will open the pokedex completion diploma each time).
-
 *NOTE: Pressing L+R succintly will only trigger ACE once. If you press it more than 30 frames, it will start triggering ACE on each frame until you release L+R.*
 
 When you want to disable the ACE-trigger, you can just move the freezer back in its position and trigger ACE, or alternatively you can save and reset.
+
+## Example: walk-through-walls
+
+This section is an example of application of the ACE-trigger.
+
+If you have created the [walk-through-walls bad eggs](walk-through-walls.md), you can use it with this setup.
+Usually the walk-through-walls bad eggs must be used with the freezer in order to be executed at each frame. However, now that we can trigger ACE at any time just by pressing L+R, we can easily execute it at each frame just by maintaining L+R. Thus, the freezer bad egg is not needed anymore to walk through walls.
+
+Instead, you can directly put the two walk-through-walls bad eggs somewhere in your box 14. Or you could, if there wasn't a subtelty: the walk-through-walls bad eggs were designed to work with the PC register aligned. Thus, if we directly execute them through ACE, it will not work because they will be executed with the PC register misaligned.
+
+In order to realign the PC register just before the execution of the walk-through-walls bad eggs, you can generate this Machop with the hexadecimal writer:
+
+```
+Box  1: 06 F0 4F E2
+Box  2: 44 F0 8F E2
+Box  3: 00 00 00 00
+Box  4: 00 00 00 00
+Box  5: 00 00 00 02
+Box  6: 00 00 00 00
+Box  7: 00 00 00 00
+Box  8: 18 0C 00 00
+Boxes 9-14: 00 00 00 00
+```
+
+Move the generated Machop just before the two walk-through-walls bad egg, somewhere in BOX 14. Now, when you will maintain L+R pressed, you will be able to walk through walls (don't forget to unmark your exit code bootstrap or it will open the pokedex completion diploma each time).
+
+*NOTE: When you use the walk-through-walls bad eggs this way, a bad egg will be created next to them. It is just some data that the walk-through-walls bad eggs store there. You can freely remove it when you want (or you can leave it there and consider that your walk-through-walls setup is now composed of 3 bad eggs).*
 
 ## Persistence (optional)
 
