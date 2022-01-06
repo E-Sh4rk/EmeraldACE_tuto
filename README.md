@@ -8,7 +8,8 @@ Summary:
 - [HeXecutor (to execute hexadecimal code)](hex-ecutor.md)
 - [Freezer bad egg (to run code at each frame)](freezer.md)
 - [Walk through walls (require freezer)](walk-through-walls.md)
-- [Hexadecimal editor](hex-editor.md)
+- [Improved ACE environment](improved-ace-env.md)
+- [Hexadecimal editor](hex-editor.md) *(deprecated)*
 
 Useful links:
 - [ACE code generator](https://e-sh4rk.github.io/EmeraldACE_web/)

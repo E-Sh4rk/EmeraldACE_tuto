@@ -1,3 +1,5 @@
+**WARNING: This tutorial is deprecated. A more customisable and reusable ACE setup is in progress, you should wait for it.**
+
 **The bad eggs created in this tutorial should not be marked or moved in your party: it could corrupt them.**
 
 # Hexadecimal editor
