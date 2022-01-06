@@ -59,7 +59,7 @@ Boxes 13-14: 00 00 00 00
 
 It should create an Abra. When this Abra is marked with any symbol, it will set the exit code to the Pokedex Completion Diploma. When it is unmarked, it will set the exit code to the value of the register `lr`.
 
-*NOTE: you can freely mark/unmark it in order to switch between the two exit codes. However, DO NOT mark/unmark any other element of your ACE setup or it will be corrupted.*
+*NOTE: you can freely mark/unmark it in order to switch between the two exit codes. However, DO NOT mark/unmark any other element of your ACE setup (unless specified otherwise) or it will be corrupted.*
 
 Mark your Abra with any symbol and replace your current exit code bootstrap by this one. Trigger ACE again: it should work as before. Store the second Abra that has just been created: you will need it later (if you plan to setup persistence).
 
@@ -97,6 +97,29 @@ W: Hexadecimal writer (bad egg)
 ```
 
 You can freely store unused components in the crafting table area (preferably not at the beginning because that's where the hexadecimal writer will write).
+
+*Optional:*
+
+As we are in the mood, let's create another bootstrap: a Thumb<->ARM switch
+that allows to switch the execution mode of the processor between ARM and Thumb.
+This bootstrap is different than the ARM bootstrap we made above: it requires the processor to be in ARM mode, and then allows to switch to Thumb mode (if the bootstrap is marked) or to stay in ARM mode but with the PC register aligned (if the bootstrap is unmarked).
+
+```
+Box  1: 00 00 00 FF
+Box  2: 06 F0 4F E2
+Box  3: 0B B0 DF E5
+Box  4: 00 00 5B E3
+Box  5: 38 B0 8F E2
+Box  6: 08 F0 8F E2
+Box  7: 00 00 00 00
+Box  8: D6 F0 00 00
+Box  9: 44 F0 00 00
+Box 10: 01 B0 8B 12
+Box 11: 1B FF 2F E1
+Boxes 12-14: 00 00 00 00
+```
+
+This should create a Machop. You can store it somewhere (we do not need it now).
 
 ## The ACE trigger bad egg
 
@@ -175,21 +198,10 @@ Usually the walk-through-walls bad eggs must be used with the freezer in order t
 
 Instead, you can directly put the two walk-through-walls bad eggs somewhere in your box 14. Or you could, if there wasn't a subtelty: the walk-through-walls bad eggs were designed to work with the PC register aligned. Thus, if we directly execute them through ACE, it will not work because they will be executed with the PC register misaligned.
 
-In order to realign the PC register just before the execution of the walk-through-walls bad eggs, you can generate this Machop with the hexadecimal writer:
+In order to realign the PC register just before the execution of the walk-through-walls bad eggs, we can use the Machop we generated earlier (the Thumb<->ARM switch).
 
-```
-Box  1: 06 F0 4F E2
-Box  2: 44 F0 8F E2
-Box  3: 00 00 00 00
-Box  4: 00 00 00 00
-Box  5: 00 00 00 02
-Box  6: 00 00 00 00
-Box  7: 00 00 00 00
-Box  8: 18 0C 00 00
-Boxes 9-14: 00 00 00 00
-```
-
-Move the generated Machop just before the two walk-through-walls bad egg, somewhere in BOX 14. Now, when you will maintain L+R pressed, you will be able to walk through walls (don't forget to unmark your exit code bootstrap or it will open the pokedex completion diploma each time).
+Move the Machop just before the two walk-through-walls bad egg, somewhere in BOX 14.
+Ensure that the Machop is unmarked: we do not want to switch to Thumb mode, but to stay in ARM mode and realign the PC register. Now, when you will maintain L+R pressed, you will be able to walk through walls (don't forget to unmark your exit code bootstrap or it will open the pokedex completion diploma each time).
 
 *NOTE: When you use the walk-through-walls bad eggs this way, a bad egg will be created next to them. It is just some data that the walk-through-walls bad eggs store there. You can freely remove it when you want (or you can leave it there and consider that your walk-through-walls setup is now composed of 3 bad eggs).*
 
