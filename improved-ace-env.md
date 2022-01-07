@@ -207,4 +207,139 @@ Ensure that the Machop is unmarked: we do not want to switch to Thumb mode, but 
 
 ## Persistence (optional)
 
-Soon.
+In this section, we'll learn how to make the ACE trigger persistent to a save/reset.
+
+*NOTE: actually it can also be used to make other codes persistent, such as the walk-through-wall code for instance, but making the ACE trigger persistent seems more convenient as it then allows to trigger any other ACE code).*
+
+Before starting, you have to understand how this works. We will modify the save so that the object event associated with the main character is glitched. When the game will load your character (i.e. when the save loads), it will execute the callback associated with this glitched object event. This callback leads to somewhere in the box data, a little after the glitched sprite animation callback used by ACE:
+
+```
+BOX 12:
+\\\\\\\\\\\\\\\\
+A  E  C  +  +  +
+////////////////
++  +  +  +  +  +
++  +  +  +  +  +
+
+-: Empty slot
+A: ARM bootstrap (Absol)
+E: Exit code bootstrap (Abra)
+C: Crafting table (bad egg)
++: Area of the crafting table
+\\\\: Approximate entry area for sprite animation ACE (and ACE-trigger)
+////: Approximate entry area for glitched object event callback
+```
+
+It means that, when your save will load, it will execute the code located just after
+the third row of the box 12. In the other hand, when you trigger standard ACE, it executes the code located just after the first row (the two bootstraps and the crafting table that makes it jump to the end of the crafting table area). Consequently, the code that you put in the crafting table area, below the third row, will be executed when your save load but not when you trigger ACE.
+
+That's why the code responsible for loading the ACE trigger bad egg will be located in the crafting table area (we only want it to be executed once when the save loads).
+
+You have to be careful:
+- **DO NOT PUT ANY DATA (POKEMON OR EGG) IN THE /////// AREA**: when your save loads, it will jump to somewhere randomly in this area (due to ASLR), thus you shouldn't put any data or code here as it might get partially executed.
+- Before enabling the persistence, you must ensure that the code you put in the crafting table area does not make the game crash, otherwise it will crash every time you try to load your save (and every time you make a change in this area, you must test it before saving).
+
+Okay, now let's start. We just need two new extensions for the freezer: the main purpose of these two extensions is to keep the main character object event glitched.
+
+You can create them using the hexadecimal writer:
+
+```
+Box  1: 1A B0 9F E5
+Box  2: 0B C0 A0 E3
+Box  3: 00 C0 CB E5
+Box  4: 02 10 9F E5
+Box  5: 0E 00 8F E2
+Box  6: 34 F0 8F E2
+Box  7: 99 A9 08 08
+Box  8: 8F 8E 00 00
+Box  9: 98 70 00 00
+Box 10: 56 73 03 02
+Box 11: 04 00 A0 E1
+Box 12: 11 FF 2F E1
+Boxes 13-14: 00 00 00 00
+
+```
+
+It will create a Porygon. Store it somewhere (in another slot of the crafting table area or before the last row of BOX 11).
+
+```
+Box  1: 28 10 9F E5
+Box  2: 0C 10 91 E5
+Box  3: 00 00 51 E3
+Box  4: 0B 10 A0 E3
+Box  5: 63 10 81 12
+Box  6: 10 20 9F E5
+Box  7: 04 F0 8F E2
+Box  8: 3B 66 00 00
+Box  9: CD 00 00 00
+Box 10: 00 10 C2 E5
+Box 11: 20 F0 8F E2
+Box 12: 56 73 03 02
+Box 13: C0 22 00 03
+Box 14: 00 00 00 00
+```
+
+It will create a Porygon 2.
+You should also have a second copy of the ARM bootstrap and the exit code bootstrap (cf. section *Updating your bootstraps*).
+
+Dispose everything like that:
+
+```
+BOX 12:
+-  -  -  -  -  -
+A  E  C  +  +  +
+x  x  x  x  x  x
+A  P  +  F  M  Q
+T  +  E  +  +  +
+
+-: Empty slot
+A: ARM bootstrap (Absol)
+E: Exit code bootstrap (Abra)
+C: Crafting table (bad egg)
++: Area of the crafting table
+x: Never put anything here!
+P: Porygon
+F: Freezer (bad egg)
+M: Registry-saver extension (Metapod)
+Q: Porygon 2
+T: ACE-trigger (bad egg)
+```
+
+Also, setup your BOX 14 so that triggering ACE will only open the pokedex completion diploma without doing anything else (for that you can either set up the hex writer with only `00000000` as box names, or you can set up the hexecutor with the command `10FF2FE1` in BOX 1 name).
+
+At this point, save your game. Now we will ensure that everything's okay.
+
+*Reminder: the data in the crafting table area, below the third row, will be executed automatically when your save loads. Thus we must be careful and ensure it is correct!*
+
+1. Move the crafting table bad egg in the last slot of BOX 12, so that when you trigger ACE, it will not jump over the crafting table data (and thus it will execute it).
+2. Move the exit code bootstrap of the last row in the slot just above, and mark it. In this way, executing the code of the crafting table will exit by opening the pokedex completion diploma.
+3. Trigger ACE. It should open the pokedex completion diploma. Now your ACE trigger (and the persistence) should be active.
+4. Restore the crafting table bad egg in its original position.
+5. Briefly press L+R: each time you press it, it should open the Pokedex completion diploma.
+6. Enter/leave a building, open/close the Pokedex. It shouldn't crash.
+7. Move the crafting table bad egg in the last slot of BOX 12 again.
+8. Move the exit code bootstrap of the crafting table area back in the last row.
+9. Briefly press L+R many times. It should not crash (and it should not open the diploma).
+10. Restore the crafting table bad egg in its original position.
+11. Pressing L+R should not do anything. Enter or leave a building.
+
+If there was no crash, you can proceed.
+
+**In order to activate the persistence:**
+
+1. Move the crafting table bad egg in the last slot of BOX 12.
+2. Move the exit code bootstrap of the last row in the slot just above, and mark it.
+3. Trigger ACE. It should open the pokedex completion diploma. Now your ACE trigger (and the persistence) should be disabled.
+4. Restore the crafting table bad egg in its original position.
+5. Move the exit code bootstrap of the crafting table area back in the last row
+(not required, but if you don't do it, the pokedex completion diploma will show when you load your save)
+6. Your setup should look like the one above.
+
+You can do some more tests by pressing L+R and ensuring there are no crashes, and then you can finally save.
+
+**In order to disable the persistence:**
+
+1. Do the exact same steps as for the activation.
+2. Enter in a new map (you can enter or leave a building).
+
+Test that your ACE trigger is disabled (pressing L+R shouldn't do anything), and then you can save.
