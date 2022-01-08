@@ -14,4 +14,6 @@ Summary:
 Useful links:
 - [ACE code generator](https://e-sh4rk.github.io/EmeraldACE_web/)
 - [Save editor for glitchers](https://github.com/E-Sh4rk/PokeGlitzer)
-
+- [Sleipnir's pastebin](https://pastebin.com/u/Sleipnir17) (standard ACE codes that do not need all this setup)
+- [Merrp's pastebin](https://pastebin.com/u/merrp) (some other useful codes)
+- [Merrp's Gen3Tools repo](https://github.com/aarant/gen3tools) (some useful tools and notes)
