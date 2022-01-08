@@ -288,9 +288,9 @@ Box 14: 74090000
 
 A bad egg should appear in BOX 14 slot 28. In order for it to be active, you can place it anywhere after the Thumb->ARM bootstrap (or the ARM entry point of your ACE setup). It does not need to be after the certificate exit code bootstrap as it does not use any exit code. As the 30 slots following this bad egg will be skipped when triggering ACE, you should put it at least 31 slots before the certificate exit code bootstrap (or any data that you want to be executed).
 
-We recommend placing it in BOX 12 slot 9 as you will need to place it there if you want to setup the binary editor and the save hack that allows it to persist after a restart.
+We recommend placing it in BOX 12 slot 9 as you will need to place it there if you want to setup the improved ACE setup with persistence (that allows to trigger ACE from anywhere just by pressing L+R).
 
-If you follow our advice, you boxes should look like that:
+If you followed our advice, your boxes should look like that:
 
 ```
 BOX 12:
@@ -322,9 +322,58 @@ E: Exit code bootstrap
 W: Hexadecimal writer bad egg
 ```
 
+An issue with the crafting table is that it might modify the CPSR status flags of the processor. As standard ACE codes might rely on these flags being 0, you would have to move the crafting table and all the content you stored in its area before the last row of BOX 11 when you want to execute standard ACE codes, which can be boring. That is why we will generate a Pokemon containing code to reset the CPSR flags. It will also serve as a test to check that our crafting table is correct. Just write those box names and trigger the hexadecimal-writer bad egg:
+
+```
+Box  1: 00B0A0E3
+Box  2: 01B09BE2
+Box  3: 40F08FE2
+Box  4: 00000000
+Box  5: 00000002
+Box  6: 00000000
+Box  7: 00000000
+Box  8: D00E0000
+Boxes 9-14: 00000000
+```
+
+If your crating table is correct and you correctly typed the box names, a bulbasaur should have appeard in the slot just after the crafting table bad egg. We recommand you to put this bulbasaur in the slot just after the end of the crafting table area.
+
+If you followed our advice, your boxes should look like that:
+
+```
+BOX 12:
+-  -  -  -  -  -
+A  -  C  +  +  +
++  +  +  +  +  +
++  +  +  +  +  +
++  +  +  +  +  +
+
+BOX 13:
++  +  +  +  +  +
++  +  +  B  -  -
+-  -  -  -  -  -
+-  -  -  -  -  -
+-  -  -  -  -  -
+
+BOX 14:
+E  -  -  -  -  -
+-  -  -  -  -  -
+-  -  -  -  -  -
+-  -  -  -  -  -
+-  -  -  -  W  -
+
+-: Empty slot
+A: Thumb->ARM bootstrap (if any)
+C: Crafting table bad egg
++: Area of the crafting table
+B: CPSR status reset (Bulbasaur)
+E: Exit code bootstrap
+W: Hexadecimal writer bad egg
+```
+
 Your crafting table can be used for many things, for instance see [how to generate a Pokemon with it](generating-pkmn.md).
 
-NOTE: you do not need to move your crafting table or its content when you want to execute standard ACE codes. It will not interfere with the execution of standard ACE codes, so you can leave it there. Only the hexadecimal-writer should be moved somewhere before the last row of BOX 11 when you want to execute standard ACE codes.
+NOTE: you do not need to move your crafting table or its content when you want to execute standard ACE codes. It will not interfere with the execution of standard ACE codes, so you can leave it there. Only the hexadecimal-writer should be moved somewhere before the last row of BOX 11 (or inside the crafting table area) when you want to execute standard ACE codes.
 
 # Appendix: in case of failure
 

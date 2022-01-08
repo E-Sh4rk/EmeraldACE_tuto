@@ -75,7 +75,7 @@ A  E  C  +  +  +
 
 BOX 13:
 +  +  +  +  +  +
-+  +  +  -  -  -
++  +  +  B  -  -
 -  -  -  -  -  -
 -  -  -  -  -  -
 -  -  -  -  -  -
@@ -92,6 +92,7 @@ A: ARM bootstrap (Absol)
 E: Exit code bootstrap (Abra)
 C: Crafting table (bad egg)
 +: Area of the crafting table
+B: CPSR status reset (Bulbasaur)
 H: HeXecutor (only when you want to use it)
 W: Hexadecimal writer (bad egg)
 ```
