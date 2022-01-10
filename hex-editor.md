@@ -1,62 +1,29 @@
-**WARNING: This tutorial is deprecated. A more customisable and reusable ACE setup is in progress, you should wait for it.**
-
 **The bad eggs created in this tutorial should not be marked or moved in your party: it could corrupt them.**
 
-# Hexadecimal editor
+*If you have already followed the old version of the memory editor tutorial and are willing to update it so that it works with the improved ACE setup, you can start at the section "Implementation of the launcher". The 12 bad eggs composing the memory editor haven't changed. However, you can throw away the 4 bad eggs of the launcher, the Mew and the Mewtwo: those ones are deprecated.*
 
-In this tutorial, we will implement an hexadecimal editor inside the box storage. We will then implement a launcher that will make the hex editor start by pressing L+R. This hack will be persistent (it will stay after a save/reset), but you will be able to enable/disable it when you want.
+# Memory editor
 
-**Credits:** This tutorial is an adapation of [this article on Hatena Blog](https://bzl.hatenablog.com/entry/2019/09/29/182642). Credits for the implementation of the hexadecimal editor goes to the author of this article. For my part, I analyzed and brought some minor changes to the implementation so that it can work within the English version.
+In this tutorial, we will implement an hexadecimal editor inside the box storage. We highly recommand to setup the [improved ACE environment](improved-ace-env.md) before following this tutorial: even though the memory editor can be started with standard ACE (i.e. by viewing the summary of a glitch Pokemon), doing so will fail to pause the game because you are only supposed to open it while in the overworld (not in a menu). Our recommendation is to open the memory editor by pressing L+R (using the improved ACE environment).
+
+**Credits:** This tutorial is an adapation of [this article on Hatena Blog](https://bzl.hatenablog.com/entry/2019/09/29/182642). Credits for the initial implementation of the memory editor goes to the author of this article. For this tutorial, I have adapted the implementation to work on the US version and I made it compatible with our ACE setup.
 
 ## Prerequisite
 
 - A stable ACE glitch species such as [0x40E9](stable-ace.md) (with its Thumb->ARM bootstrap)
 - A [certificate exit code bootstrap](exit-code.md) (you can place it in the first slot of BOX 14 for instance). Note that it does not matter if you have renamed your BOX 14 as the creation of this bad egg uses the hexadecimal-writer bad egg
 - The [hexadecimal-writer and crafting table bad eggs](hex-writer.md)
+- At least the *Thumb<->ARM switch* from the [improved ACE environment](improved-ace-env.md), but following the entire tutorial is recommended
 
 ## Implementation of the hex editor
 
 NOTE: the codes given here are for the english version. I have not written the codes for the other versions yet.
 
-In order to implement the hexadecimal editor, you have to execute 24 codes with the hex-writer (together with the crafting table). It will create a total of 12 bad eggs. In order to avoid propagating mistakes, we recommend executing the codes by batches of 6: it should create 3 bad eggs that you should then move into their final position before continuing with the next batch.
+In order to implement the memory editor, you have to execute 24 codes with the hex-writer (together with the crafting table). It will create a total of 12 bad eggs. In order to avoid propagating mistakes, we recommend executing the codes by batches of 6: it should create 3 bad eggs that you should then store somewhere (before the last row of BOX 11 or in a safe spot of the crafting table area) before continuing with the next batch. **Keep track of the order of the bad eggs (the order of creation)! If you put them in the wrong order, it will not work, and it will be a nightmare to fix it!**
 
-Here is how you have to position the different elements in your boxes:
+**Do not look at BOX 12** after the execution of code with an odd number (for instance, you can look at your BOX 12 after having executed the code 2, but not between the execution of the code 1 and 2). If you do not follow this rule, the data you just wrote will get corrupted.
 
-```
-BOX 12:
--  -  -  -  -  -
-A  -  C  +  +  +
-+  +  +  +  +  +
-+  +  +  +  +  +
-H  H  H  H  H  H
-
-BOX 13:
-H  H  H  H  H  H
-+  +  +  -  -  -
--  -  -  -  -  -
--  -  -  -  -  -
--  -  -  -  -  -
-
-BOX 14:
-E  -  -  -  -  -
--  -  -  -  -  -
--  -  -  -  -  -
--  -  -  -  -  -
--  -  -  -  W  -
-
--: Empty slot
-A: Thumb->ARM bootstrap (if any)
-C: Crafting table bad egg
-+: Area of the crafting table
-H: Hexadecimal editor bad eggs
-E: Exit code bootstrap
-W: Hexadecimal writer bad egg
-```
-
-The content of your box 14 can be different, but your crafting table and hexadecimal editor bad eggs must be in
-the position specified. The order of the hexadecimal editor bad eggs is the order in which they will be created. Do not change their relative order or it will be a nightmare to fix it!
-
-**Do not look at BOX 12** during this process except at the end of a batch. We recommend batches of 6 codes (= 3 bad eggs), but you can actually do batches of any even number if you prefer.
+You can freely save between the batches (if you have enabled the persistent ACE setup, please ensure you haven't stored a bad egg in an unsafe slot of the crafting table area before saving).
 
 NOTE: spaces have been added only for readability purposes. Box names must not contain any space. Boxes 11-14 have been omitted: their name should be `00000000` during the whole process.
 
@@ -376,250 +343,13 @@ Box 10: FF 00 FC 15
 
 ## Implementation of the launcher
 
-Now, we have to implement the launcher that will allow us to execute the hex editor by pressing L+R.
-
-It requires the creation of 4 bad eggs (8 codes). We will put it just above the hex-editor bad eggs:
-
-```
-BOX 12:
--  -  -  -  -  -
-A  -  C  +  +  +
-+  +  +  +  +  +
-L  L  L  L  +  +
-H  H  H  H  H  H
-
-BOX 13:
-H  H  H  H  H  H
-+  +  +  -  -  -
--  -  -  -  -  -
--  -  -  -  -  -
--  -  -  -  -  -
-
--: Empty slot
-A: Thumb->ARM bootstrap (if any)
-C: Crafting table bad egg
-+: Area of the crafting table
-L: Launcher bad eggs
-H: Hexadecimal editor bad eggs
-```
-
-The procedure is the same as for the implementation of the hex editor. As there are 8 codes this time, we recommend you to proceed by batches of 4 codes.
-
-```
-=============== CODE 1 ===============
-
-Box 1:  F0 B4 04 1C
-Box 2:  29 48 01 38
-Box 3:  01 78 00 29
-Box 4:  47 D1 01 21
-Box 5:  00 E0 AA AA
-Box 6:  01 70 41 1C
-Box 7:  26 4A 26 A0
-Box 8:  10 44 20 31
-Box 9:  78 22 92 00
-Box 10: 00 E0 AA AA
-
-=============== CODE 2 ===============
-
-Box 1:  0B DF 20 48
-Box 2:  22 49 02 1C
-Box 3:  00 E0 AA AA
-Box 4:  21 32 89 23
-Box 5:  9B 00 03 33
-Box 6:  00 E0 AA AA
-Box 7:  02 25 2E C0
-Box 8:  1D 48 1E 49
-Box 9:  00 E0 AA AA
-Box 10: 1E 4A 1F 4B
-
-=============== CODE 3 ===============
-
-Box 1:  20 4D 21 4E
-Box 2:  22 4F EE C0
-Box 3:  22 49 24 4A
-Box 4:  24 4B 25 4D
-Box 5:  00 E0 AA AA
-Box 6:  24 4E 25 4F
-Box 7:  EE C0 26 49
-Box 8:  26 4A 27 4B
-Box 9:  27 4E F4 25
-Box 10: 00 E0 AA AA
-
-=============== CODE 4 ===============
-
-Box 1:  AD 19 80 27
-Box 2:  BF 00 01 37
-Box 3:  00 E0 AA AA
-Box 4:  EE C0 09 49
-Box 5:  03 31 23 4A
-Box 6:  00 E0 AA AA
-Box 7:  22 4B 0E C0
-Box 8:  09 48 23 49
-Box 9:  00 E0 AA AA
-Box 10: 08 60 F0 BC
-
-=============== CODE 5 ===============
-
-Box 1:  20 1C 01 49
-Box 2:  08 47 00 00
-Box 3:  99 A9 08 08
-Box 4:  00 D0 03 02
-Box 5:  00 E0 AA AA
-Box 6:  2C 01 00 00
-Box 7:  28 30 00 23
-Box 8:  00 E0 03 02
-Box 9:  0F 00 A0 E1
-Box 10: 00 E0 AA AA
-
-=============== CODE 6 ===============
-
-Box 1:  05 00 80 E2
-Box 2:  10 FF 2F E1
-Box 3:  00 E0 AA AA
-Box 4:  0A 48 40 78
-Box 5:  03 21 88 42
-Box 6:  00 E0 AA AA
-Box 7:  0B D1 09 4B
-Box 8:  1B 78 01 2B
-Box 9:  00 E0 AA AA
-Box 10: 07 D0 08 4B
-
-=============== CODE 7 ===============
-
-Box 1:  00 20 18 60
-Box 2:  D8 60 07 48
-Box 3:  98 60 07 48
-Box 4:  18 61 07 48
-Box 5:  00 E0 AA AA
-Box 6:  6E 21 81 71
-Box 7:  06 4B 18 47
-Box 8:  EC 22 00 03
-Box 9:  38 0E 00 03
-Box 10: 00 E0 AA AA
-
-=============== CODE 8 ===============
-
-Box 1:  50 73 03 02
-Box 2:  50 27 00 03
-Box 3:  00 E0 AA AA
-Box 4:  FC 7F 00 03
-Box 5:  00 00 00 00
-Box 6:  00 00 00 00
-Box 7:  00 00 00 00
-Box 8:  00 00 00 00
-Box 9:  00 00 00 00
-Box 10: 00 00 00 00
-```
-
-## Enabling/Disabling it
-
-You're almost there! Now that we have the hex editor and the launcher, we just need a way to activate it. For that, let's invoke the power of Mewtwo.
-
-You can invoke Mewtwo with the crafting table, as usual:
-
-```
-Box  1: 1A C0 9F E5
-Box  2: 00 B0 A0 E3
-Box  3: 01 B0 4C E5
-Box  4: 0A C0 9F E5
-Box  5: 6E B0 8B E2
-Box  6: 06 B0 CC E5
-Box  7: 1E FF 2F E1
-Box  8: D2 DB 00 00
-Box  9: 50 73 03 02
-Box 10: 00 D0 03 02
-Box 11: 00 00 00 00
-Box 12: 8C 70 00 00
-Boxes 13-14: 00 00 00 00
-```
-
-Mewtwo should have appeared in your crafting table.
-Now, let's invoke Mew in order to calm him (move Mewtwo in the next slot of the crafting table, otherwise the data of Mew will be appended to the data of Mewtwo).
-
-```
-Box  1: 1A C0 9F E5
-Box  2: 12 B0 9F E5
-Box  3: 00 C0 8B E5
-Box  4: 12 B0 9F E5
-Box  5: 45 C0 4C E2
-Box  6: 06 C0 CB E5
-Box  7: 1E FF 2F E1
-Box  8: 7E F3 00 00
-Box  9: FC 7F 00 03 
-Box 10: 50 27 00 03 
-Box 11: 50 73 03 02
-Box 12: 9F 70 00 00
-Boxes 13-14: 00 00 00 00
-```
-
-Perfect! Mewtwo will be used to activate the launcher (when the launcher is active, you can open
-the hexadecimal editor just by pressing L+R). In the other hand, Mew has the power to disable it.
-
-We recommend you to put your Mew and Mewtwo in this location:
-
-```
-BOX 13:
-H  H  H  H  H  H
-+  M  M  S  -  -
--  -  -  -  -  -
--  -  -  -  -  -
--  -  -  -  -  -
-
--: Empty slot
-+: Area of the crafting table
-H: Hexadecimal editor bad eggs
-M: Mewtwo/Mew
-S: Summon spot (see explanation below)
-```
-
-Before I explain how to activate the launcher, you should save your game. **DO NOT SAVE YOUR GAME AFTER HAVING ACTIVATED THE LAUNCHER** (we must do some tests before).
-
-When you want to activate the launcher, just move Mewtwo in the *Summon Spot* and trigger ACE. It will not open the Pokedex completion diploma, you have to exit the summary screen yourself quickly. You can then move Mewtwo back in its original place. Same thing with Mew when you want to deactivate it.
-
-Before being allowed to save, you should activate the launcher and test the following things:
-- Press L+R while in the overworld. It should open the hex editor and you shouldn't be able to move your character.
-- Press B. It should close the hex editor (though the window does not disappear immediately due to a refreshing issue) and you should be able to move your character.
-- Open and close your pokedex, inventory, bag, etc. It shouldn't crash.
-- Fly in another city, enter in some houses, etc. It shouldn't crash.
-- Enter in a Pokemon Center, open your PC, move Mew in the Summon Spot.
-- Trigger ACE in order to disable the launcher. Pressing L+R should not open the hex editor anymore.
-
-These tests are here to ensure that you will not be softlocked (as the launcher stays active after a save/reset). If all the tests succeeded, then well done, you succeed! You can now save your game even with the launcher active.
-If some tests failed, you should refer to the appendix.
-
-**IMPORTANT:** When the launcher is active, the following row of your crafting table area should be left empty:
-
-```
-BOX 12:
--  -  -  -  -  -
-A  -  C  +  +  +
-x  x  x  x  x  x
-L  L  L  L  +  +
-H  H  H  H  H  H
-
--: Empty slot
-A: Thumb->ARM bootstrap (if any)
-C: Crafting table bad egg
-+: Area of the crafting table
-x: SLOTS THE MUST REMAIN EMPTY
-L: Launcher bad eggs
-H: Hexadecimal editor bad eggs
-```
-
-Indeed, when the launcher is active, this row becomes the entry point of a glitched object action associated with your character. It means that each time your character is refreshed (when closing the Pokedex, when entering in a building, etc), the content of this row is executed (we want it to be empty so that the first thing to be executed is the launcher).
-
-**How to use it:**
-- Press L+R to open the hex editor
-- The 4 first bytes represent the address, the last one the value
-- Choose the desired address, and then you can modify the value and press A to confirm the modification
-- L and R can be used to change the value by 0x10
-- Press B to exit the hexadecimal editor
+Soon.
 
 ## Appendix: in case of failure
 
-In order to check that the data in your bad eggs is correct, we will use a special bad egg that computes a checksum of the 6 following slots and store it in the attack and defense stats of the second pokemon in your team. Before going further, don't forget to deactivate the launcher (or reload your save)!
+In order to check that the data in your bad eggs is correct, we will use a special bad egg that computes a checksum of the 6 following slots and store it in the attack and defense stats of the second pokemon in your team.
 
-First, generate the following bad egg with your hex-writer:
+First, generate the following bad egg (the *Checksum bad egg*) with your hex-writer:
 
 ```
 Box  1: 46808FE2
@@ -638,24 +368,21 @@ Box 13: 10FF2FE1
 Box 14: 50450202
 ```
 
-Now, move your exit code bootstrap and the bad egg just created in the following positions:
+Now, move this bad egg somewhere after the exit code bootstrap, for instance in BOX 13:
 
 ```
 BOX 13:
-H  H  H  H  H  H
-+  M  M  S  -  -
-E  -  -  -  -  C
++  +  +  +  +  +
++  +  +  B  -  -
+-  -  -  -  -  C
 x  x  x  x  x  x
 -  -  -  -  -  -
 
 -: Empty slot
 +: Area of the crafting table
-H: Hexadecimal editor bad eggs
-M: Mewtwo/Mew
-S: Summon spot (see explanation below)
-E: Exit code bootstrap
+B: CPSR status reset (Bulbasaur)
 C: Checksum bad egg
-x: Position where you will put the bad eggs to check
+x: Slots where you will put the bad eggs to check
 ```
 
 Leave the `x` slots empty for now and trigger ACE. The second pokemon of your party should
@@ -668,15 +395,12 @@ Then, move your group of bad eggs back into their original position and proceed 
 
 ```
 Group             Attack  Defense
-Launcher 1-2      4269    14203
-Launcher 3-4      27183   14177
-
 Hex editor 1-3    59215   52963
 Hex editor 4-6    14453   33968
 Hex editor 7-9    43544   3083
 Hex editor 10-12  53719   10227
 ```
 
-NOTE: The checksum does not take the order into account, so take care not to change the relative order of the bad eggs otherwise it will be difficult to notice and to find the right order again!
+NOTE: The checksum does not take the order into account, so take care not to change the relative order of the bad eggs, otherwise it will be difficult to notice it and to find the right order again!
 
 If you have different values for some groups, then you should throw away the corresponding bad eggs and create them again.

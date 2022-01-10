@@ -9,7 +9,7 @@ Summary:
 - [Freezer bad egg (to run code at each frame)](freezer.md)
 - [Walk through walls (require freezer)](walk-through-walls.md)
 - [Improved ACE environment](improved-ace-env.md)
-- [Hexadecimal editor](hex-editor.md) *(deprecated)*
+- [Memory editor](hex-editor.md) *([old version](hex-editor-old.md))*
 
 Useful links:
 - [ACE code generator](https://e-sh4rk.github.io/EmeraldACE_web/)
