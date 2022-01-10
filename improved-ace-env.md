@@ -126,8 +126,8 @@ This should create a Machop. You can store it somewhere (we do not need it now).
 
 This purpose of this section is to create a bad egg that, when executed with the freezer, allows to trigger ACE for anywhere just by pressing L+R.
 
-**WARNING: This is NOT compatible with the (deprecated) Hex Editor + Save Hack.
-Please disable your Hex Editor before following this section. An updated setup for the Hex Editor will be coming.**
+**WARNING: This is NOT compatible with the old version of the *memory editor + save hack*.
+Please disable your save hack before following this section: you will then be able to [update your memory editor launcher](hex-editor.md) so that it works with this new setup.**
 
 Before following this section, please ensure you have extended your freezer with the [Registry-Saver Metapod](freezer.md).
 
