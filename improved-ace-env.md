@@ -120,7 +120,7 @@ Box 11: 1B FF 2F E1
 Boxes 12-14: 00 00 00 00
 ```
 
-This should create a Machop. You can store it somewhere (we do not need it now).
+This should create a Machop. You can store it somewhere (we do not need it now). We recommend you to make a second instance of this Machop (just execute the code again), because you might need two such switches in the future.
 
 ## The ACE trigger bad egg
 
