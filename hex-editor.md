@@ -4,7 +4,7 @@
 
 # Memory editor
 
-In this tutorial, we will implement an hexadecimal editor inside the box storage. We highly recommand to setup the [improved ACE environment](improved-ace-env.md) before following this tutorial: even though the memory editor can be started with standard ACE (i.e. by viewing the summary of a glitch Pokemon), doing so will fail to pause the game because you are only supposed to open it while in the overworld (not in a menu). Our recommendation is to open the memory editor by pressing L+R (using the improved ACE environment).
+In this tutorial, we will implement a memory editor inside the box storage. We highly recommand to setup the [improved ACE environment](improved-ace-env.md) before following this tutorial: even though the memory editor can be started with standard ACE (i.e. by viewing the summary of a glitch Pokemon), doing so will fail to pause the game because you are only supposed to open it while in the overworld (not in a menu). Our recommendation is to open the memory editor by pressing L+R (using the improved ACE environment).
 
 **Credits:** This tutorial is an adapation of [this article on Hatena Blog](https://bzl.hatenablog.com/entry/2019/09/29/182642). Credits for the initial implementation of the memory editor goes to the author of this article. For this tutorial, I have adapted the implementation to work on the US version and I made it compatible with our ACE setup.
 
@@ -341,9 +341,70 @@ Box 9:  00 E0 AA AA
 Box 10: FF 00 FC 15
 ```
 
+You can temporarily store all these bad eggs in your BOX 11 (before the last row).
+Remember not to change their relative order!
+
 ## Implementation of the launcher
 
-Soon.
+In order to start the memory editor, we will need an additional bad egg. As before, you can generate it with the hex-writer, without looking at your BOX 12 between the execution of the two codes:
+
+```
+=============== CODE 1 ===============
+
+Box 1:  EF B4 0B A0
+Box 2:  06 4E 00 25
+Box 3:  35 60 F5 60
+Box 4:  07 49 7C 22
+Box 5:  92 00 0B DF
+Box 6:  04 4D B5 60
+Box 7:  CD 1C 35 61
+Box 8:  EF BC 00 47
+Boxes 9-14:  00 00 00 00
+
+=============== CODE 2 ===============
+
+Box 1:  38 0E 00 03
+Box 2:  00 00 00 40
+Box 3:  01 02 00 00            
+Box 4:  00 D0 03 02
+Box 5:  28 30 00 23
+Box 6:  21 D0 03 02
+Box 7:  27 02 00 00
+Box 8:  02 00 00 00
+Boxes 9-14:  00 00 00 00
+```
+
+That's it! You have all the ingredients: the 12 bad eggs of the memory editor, the bad egg of the launcher and the Thumb<->ARM switch. Now, in order to execute the memory editor, you should arrange these different elements like that (only the relative order of the elements is important, you can move that group of bad eggs elsewhere in BOX 13 or 14):
+
+```
+BOX 14:
+M  L  X  X  X  X
+X  X  X  X  X  X
+X  X  -  -  -  -
+-  -  -  -  -  -
+-  -  - (H)(W) -
+
+-: Empty slot
+
+M: Thumb<->ARM switch (Machop)
+L: Launcher (bad egg)
+X: Memory editor (12 bad eggs)
+H: HeXecutor (only when you want to use it)
+W: Hexadecimal writer (bad egg)
+```
+
+The Thumb<->ARM switch must be marked in order to switch execution to THUMB (the launcher of the memory editor being THUMB code).
+
+That's it! You can save your game.
+
+Now, in order to open the memory editor, you can just trigger ACE as usual (preferably with L+R if you have setup the improved ACE environment). If it crashes, please refer to the next section.
+
+**How to use the memory editor:**
+- If you started it inside a menu, you should return to the overworld in order to be able to see it (however this will fail to pause the game and your inputs will be captured by both the memory editor and the overworld)
+- The 4 first bytes represent the address, the last one the value
+- Choose the desired address, and then you can modify the value and press A to confirm the modification
+- L and R can be used to change the value by 0x10
+- Press B to exit the memory editor
 
 ## Appendix: in case of failure
 
@@ -403,4 +464,5 @@ Hex editor 10-12  53719   10227
 
 NOTE: The checksum does not take the order into account, so take care not to change the relative order of the bad eggs, otherwise it will be difficult to notice it and to find the right order again!
 
-If you have different values for some groups, then you should throw away the corresponding bad eggs and create them again.
+If you have different values for some groups, then you should throw away the corresponding bad eggs and create them again. If all the groups have a correct checksum,
+then the issue probably comes from your launcher bad egg.
