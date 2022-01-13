@@ -290,8 +290,8 @@ BOX 12:
 -  -  -  -  -  -
 A  E  C  +  +  +
 x  x  x  x  x  x
-A  P  +  F  M  Q
-T  +  E  +  +  +
+A  P  E  F  M  Q
+T  +  +  +  +  +
 
 -: Empty slot
 A: ARM bootstrap (Absol)
@@ -306,6 +306,8 @@ Q: Porygon 2
 T: ACE-trigger (bad egg)
 ```
 
+Ensure your second exit code bootstrap (the one in the crafting table area) is marked.
+
 Also, setup your BOX 14 so that triggering ACE will only open the pokedex completion diploma without doing anything else (for that you can either set up the hex writer with only `00000000` as box names, or you can set up the hexecutor with the command `10FF2FE1` in BOX 1 name).
 
 At this point, save your game. Now we will ensure that everything's okay.
@@ -313,34 +315,32 @@ At this point, save your game. Now we will ensure that everything's okay.
 *Reminder: the data in the crafting table area, below the third row, will be executed automatically when your save loads. Thus we must be careful and ensure it is correct!*
 
 1. Move the crafting table bad egg in the last slot of BOX 12, so that when you trigger ACE, it will not jump over the crafting table data (and thus it will execute it).
-2. Move the exit code bootstrap of the last row in the slot just above, and mark it. In this way, executing the code of the crafting table will exit by opening the pokedex completion diploma.
-3. Trigger ACE. It should open the pokedex completion diploma. Now your ACE trigger (and the persistence) should be active.
-4. Restore the crafting table bad egg in its original position.
-5. Briefly press L+R: each time you press it, it should open the Pokedex completion diploma.
-6. Enter/leave a building, open/close the Pokedex. It shouldn't crash.
-7. Move the crafting table bad egg in the last slot of BOX 12 again.
-8. Move the exit code bootstrap of the crafting table area back in the last row.
-9. Briefly press L+R many times. It should not crash (and it should not open the diploma).
-10. Restore the crafting table bad egg in its original position.
-11. Pressing L+R should not do anything. Enter or leave a building.
+2. Trigger ACE. It should open the pokedex completion diploma. Now your ACE trigger (and the persistence) should be active.
+3. Restore the crafting table bad egg in its original position.
+4. Briefly press L+R: each time you press it, it should open the Pokedex completion diploma.
+5. Enter/leave a building, open/close the Pokedex. It shouldn't crash.
+6. Move the crafting table bad egg in the last slot of BOX 12 again.
+7. Move the exit code bootstrap of the crafting table area one row down (it should be in the last row).
+8. Briefly press L+R many times. It should not crash (and it should not open the diploma). Now your ACE trigger should be inactive.
+9. Restore the crafting table bad egg and the exit code bootstrap back in their original positions.
+10. Pressing L+R should not do anything. Enter or leave a building.
 
 If there was no crash, you can proceed.
 
 **In order to activate the persistence:**
 
-1. Move the crafting table bad egg in the last slot of BOX 12.
-2. Move the exit code bootstrap of the last row in the slot just above, and mark it.
-3. Trigger ACE. It should open the pokedex completion diploma. Now your ACE trigger (and the persistence) should be disabled.
-4. Restore the crafting table bad egg in its original position.
-5. Move the exit code bootstrap of the crafting table area back in the last row
-(not required, but if you don't do it, the pokedex completion diploma will show when you load your save)
-6. Your setup should look like the one above.
+Your BOX 12 should look like the scheme above.
 
-You can do some more tests by pressing L+R and ensuring there are no crashes, and then you can finally save.
+1. Move the crafting table bad egg in the last slot of BOX 12.
+2. Trigger ACE. It should open the pokedex completion diploma. Now your ACE trigger (and the persistence) should be active.
+3. Restore the crafting table bad egg in its original position.
+4. Your setup should look like the one above.
+5. You can do some more tests by pressing L+R and ensuring there are no crashes, and then you can save.
+
+Note that while the persistence is active, the pokedex completion diploma will open once each time you load your save.
 
 **In order to disable the persistence:**
 
 1. Do the exact same steps as for the activation.
 2. Enter in a new map (you can enter or leave a building).
-
-Test that your ACE trigger is disabled (pressing L+R shouldn't do anything), and then you can save.
+3. Test that your ACE trigger is disabled (pressing L+R shouldn't do anything), and then you can save.
