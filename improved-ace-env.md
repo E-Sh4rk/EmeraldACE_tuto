@@ -344,3 +344,30 @@ Note that while the persistence is active, the pokedex completion diploma will o
 1. Do the exact same steps as for the activation.
 2. Enter in a new map (you can enter or leave a building).
 3. Test that your ACE trigger is disabled (pressing R shouldn't do anything), and then you can save.
+
+## BONUS: Trigger a different payload when L+R is pressed
+
+This section allows you to trigger two different ACE payloads depending on whether the L key is pressed or not
+when triggering ACE with the R key.
+
+For that, create a special *payload switch Pokemon* using the hexadecimal writer:
+
+```
+Box  1: 00 00 00 FF
+Box  2: 44 A0 8F E2
+Box  3: 12 B0 9F E5
+Box  4: B0 B0 DB E1
+Box  5: 02 BC 1B E2
+Box  6: 5A AE 9A 02
+Box  7: 0A F0 A0 E1
+Box  8: 63 2A 00 00
+Box  9: 1B A1 00 00
+Box 10: EC 22 00 03
+```
+
+It should create a Spoink. This Spoink will allow you to switch between two ACE payloads: this first one will be executed when L+R is pressed, the second one when only R is pressed.
+
+This Spoink must be placed just before your first payload (in BOX 13 or 14). For instance, if you want your first payload to be the walk-through-walls,
+put this Spoink just before the Machop and the two walk-through-walls bad eggs.
+
+Your second payload must be placed at least 19 slots after the Spoink: there must be at least 18 slots (= 3 rows) between your Spoink and the start of your second payload.
