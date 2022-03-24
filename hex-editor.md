@@ -4,7 +4,7 @@
 
 # Memory editor
 
-In this tutorial, we will implement a memory editor inside the box storage. We highly recommand to setup the [improved ACE environment](improved-ace-env.md) before following this tutorial: even though the memory editor can be started with standard ACE (i.e. by viewing the summary of a glitch Pokemon), doing so will fail to pause the game because you are only supposed to open it while in the overworld (not in a menu). Our recommendation is to open the memory editor by pressing L+R (using the improved ACE environment).
+In this tutorial, we will implement a memory editor inside the box storage. We highly recommand to setup the [improved ACE environment](improved-ace-env.md) before following this tutorial: even though the memory editor can be started with standard ACE (i.e. by viewing the summary of a glitch Pokemon), doing so will fail to pause the game because you are only supposed to open it while in the overworld (not in a menu). Our recommendation is to open the memory editor by pressing R (using the improved ACE environment).
 
 **Credits:** This tutorial is an adapation of [this article on Hatena Blog](https://bzl.hatenablog.com/entry/2019/09/29/182642). Credits for the initial implementation of the memory editor goes to the author of this article. For this tutorial, I have adapted the implementation to work on the US version and I made it compatible with our ACE setup.
 
@@ -397,7 +397,7 @@ The Thumb<->ARM switch must be marked in order to switch execution to THUMB (the
 
 That's it! You can save your game.
 
-Now, in order to open the memory editor, you can just trigger ACE as usual (preferably with L+R if you have setup the improved ACE environment). If it crashes, please refer to the next section.
+Now, in order to open the memory editor, you can just trigger ACE as usual (preferably with R if you have setup the improved ACE environment). If it crashes, please refer to the next section.
 
 **How to use the memory editor:**
 - If you started it inside a menu, you should return to the overworld in order to be able to see it (however this will fail to pause the game and your inputs will be captured by both the memory editor and the overworld)
