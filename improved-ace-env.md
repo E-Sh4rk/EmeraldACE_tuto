@@ -3,7 +3,7 @@
 # New ACE environment 
 
 In this tutorial, we will update your bootstraps (thanks to the hexadecimal writer) so that they become more stable and convenient.
-Then, we will create a bad egg (to use with the freezer) that will allow you to trigger ACE just by pressing L+R.
+Then, we will create a bad egg (to use with the freezer) that will allow you to trigger ACE just by pressing R.
 
 Finally, in the last (optional) part, we will add some more components to our ACE environment allowing the former bad egg to automatically be loaded when your save load.
 
@@ -124,7 +124,7 @@ This should create a Machop. You can store it somewhere (we do not need it now).
 
 ## The ACE trigger bad egg
 
-This purpose of this section is to create a bad egg that, when executed with the freezer, allows to trigger ACE for anywhere just by pressing L+R.
+This purpose of this section is to create a bad egg that, when executed with the freezer, allows to trigger ACE for anywhere just by pressing R.
 
 **WARNING: This is NOT compatible with the old version of the *memory editor + save hack*.
 Please disable your save hack before following this section: you will then be able to [update your memory editor launcher](hex-editor.md) so that it works with this new setup.**
@@ -138,8 +138,8 @@ CODE 1:
 
 Box  1: 3C 90 9F E5
 Box  2: B0 A0 D9 E1
-Box  3: 03 AC 0A E2
-Box  4: 03 0C 5A E3
+Box  3: 01 AC 0A E2
+Box  4: 01 0C 5A E3
 Box  5: 00 00 00 FF
 Box  6: 04 F0 8F 02
 Box  7: 00 80 A0 E3
@@ -182,11 +182,11 @@ T: ACE-trigger (bad egg)
 Ensure that your exit code bootstrap is marked (the freezer must be executed with the pokedex completion diploma exit code in order to ensure that it will be executed only once).
 
 Trigger ACE by looking at the summary of your stable ACE species (it shouldn't crash).
-Now, the ACE-trigger should be active. You can test it by pressing L+R: it should trigger ACE and thus open the pokedex completion diploma again. As the Freezer is currently active in your ACE setup, it will have as effect to execute it again and this it will disable the ACE-trigger.
+Now, the ACE-trigger should be active. You can test it by pressing R: it should trigger ACE and thus open the pokedex completion diploma again. As the Freezer is currently active in your ACE setup, it will have as effect to execute it again and this it will disable the ACE-trigger.
 
-If this worked, well done! You can now enable the ACE trigger again (by manually triggering ACE with your stable ACE species), and then you can freely remove the freezer (and the two elements next to it) and execute the ACE you want by pressing L+R :)
+If this worked, well done! You can now enable the ACE trigger again (by manually triggering ACE with your stable ACE species), and then you can freely remove the freezer (and the two elements next to it) and execute the ACE you want by pressing R :)
 
-*NOTE: Pressing L+R succintly will only trigger ACE once. If you press it more than 30 frames, it will start triggering ACE on each frame until you release L+R.*
+*NOTE: Pressing R succintly will only trigger ACE once. If you press it more than 30 frames, it will start triggering ACE on each frame until you release R.*
 
 When you want to disable the ACE-trigger, you can just move the freezer back in its position and trigger ACE, or alternatively you can save and reset.
 
@@ -195,14 +195,14 @@ When you want to disable the ACE-trigger, you can just move the freezer back in 
 This section is an example of application of the ACE-trigger.
 
 If you have created the [walk-through-walls bad eggs](walk-through-walls.md), you can use it with this setup.
-Usually the walk-through-walls bad eggs must be used with the freezer in order to be executed at each frame. However, now that we can trigger ACE at any time just by pressing L+R, we can easily execute it at each frame just by maintaining L+R. Thus, the freezer bad egg is not needed anymore to walk through walls.
+Usually the walk-through-walls bad eggs must be used with the freezer in order to be executed at each frame. However, now that we can trigger ACE at any time just by pressing R, we can easily execute it at each frame just by maintaining R. Thus, the freezer bad egg is not needed anymore to walk through walls.
 
 Instead, you can directly put the two walk-through-walls bad eggs somewhere in your box 14. Or you could, if there wasn't a subtelty: the walk-through-walls bad eggs were designed to work with the PC register aligned. Thus, if we directly execute them through ACE, it will not work because they will be executed with the PC register misaligned.
 
 In order to realign the PC register just before the execution of the walk-through-walls bad eggs, we can use the Machop we generated earlier (the Thumb<->ARM switch).
 
 Move the Machop just before the two walk-through-walls bad egg, somewhere in BOX 14.
-Ensure that the Machop is unmarked: we do not want to switch to Thumb mode, but to stay in ARM mode and realign the PC register. Now, when you will maintain L+R pressed, you will be able to walk through walls (don't forget to unmark your exit code bootstrap or it will open the pokedex completion diploma each time).
+Ensure that the Machop is unmarked: we do not want to switch to Thumb mode, but to stay in ARM mode and realign the PC register. Now, when you will maintain R pressed, you will be able to walk through walls (don't forget to unmark your exit code bootstrap or it will open the pokedex completion diploma each time).
 
 *NOTE: When you use the walk-through-walls bad eggs this way, a bad egg will be created next to them. It is just some data that the walk-through-walls bad eggs store there. You can freely remove it when you want (or you can leave it there and consider that your walk-through-walls setup is now composed of 3 bad eggs).*
 
@@ -317,13 +317,13 @@ At this point, save your game. Now we will ensure that everything's okay.
 1. Move the crafting table bad egg in the last slot of BOX 12, so that when you trigger ACE, it will not jump over the crafting table data (and thus it will execute it).
 2. Trigger ACE. It should open the pokedex completion diploma. Now your ACE trigger (and the persistence) should be active.
 3. Restore the crafting table bad egg in its original position.
-4. Briefly press L+R: each time you press it, it should open the Pokedex completion diploma.
+4. Briefly press R: each time you press it, it should open the Pokedex completion diploma.
 5. Enter/leave a building, open/close the Pokedex. It shouldn't crash.
 6. Move the crafting table bad egg in the last slot of BOX 12 again.
 7. Move the exit code bootstrap of the crafting table area one row down (it should be in the last row).
-8. Briefly press L+R many times. It should not crash (and it should not open the diploma). Now your ACE trigger should be inactive.
+8. Briefly press R many times. It should not crash (and it should not open the diploma). Now your ACE trigger should be inactive.
 9. Restore the crafting table bad egg and the exit code bootstrap back in their original positions.
-10. Pressing L+R should not do anything. Enter or leave a building.
+10. Pressing R should not do anything. Enter or leave a building.
 
 If there was no crash, you can proceed.
 
@@ -335,7 +335,7 @@ Your BOX 12 should look like the scheme above.
 2. Trigger ACE. It should open the pokedex completion diploma. Now your ACE trigger (and the persistence) should be active.
 3. Restore the crafting table bad egg in its original position.
 4. Your setup should look like the one above.
-5. You can do some more tests by pressing L+R and ensuring there are no crashes, and then you can save.
+5. You can do some more tests by pressing R and ensuring there are no crashes, and then you can save.
 
 Note that while the persistence is active, the pokedex completion diploma will open once each time you load your save.
 
@@ -343,4 +343,4 @@ Note that while the persistence is active, the pokedex completion diploma will o
 
 1. Do the exact same steps as for the activation.
 2. Enter in a new map (you can enter or leave a building).
-3. Test that your ACE trigger is disabled (pressing L+R shouldn't do anything), and then you can save.
+3. Test that your ACE trigger is disabled (pressing R shouldn't do anything), and then you can save.
