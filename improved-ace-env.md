@@ -186,7 +186,7 @@ Now, the ACE-trigger should be active. You can test it by pressing R: it should 
 
 If this worked, well done! You can now enable the ACE trigger again (by manually triggering ACE with your stable ACE species), and then you can freely remove the freezer (and the two elements next to it) and execute the ACE you want by pressing R :)
 
-*NOTE: Pressing R succintly will only trigger ACE once. If you press it more than 30 frames, it will start triggering ACE on each frame until you release R.*
+*NOTE: Pressing R succintly will only trigger ACE once. If you press it more than 15 frames, it will start triggering ACE twice a frame until you release R.*
 
 When you want to disable the ACE-trigger, you can just move the freezer back in its position and trigger ACE, or alternatively you can save and reset.
 
