@@ -210,7 +210,7 @@ Ensure that the Machop is unmarked: we do not want to switch to Thumb mode, but 
 
 In this section, we'll learn how to make the ACE trigger persistent to a save/reset.
 
-*NOTE: actually it can also be used to make other codes persistent, such as the walk-through-wall code for instance, but making the ACE trigger persistent seems more convenient as it then allows to trigger any other ACE code).*
+*NOTE: actually it can also be used to make other codes persistent, such as the walk-through-wall code for instance, but making the ACE trigger persistent seems more convenient as it then allows to trigger any other ACE code.*
 
 Before starting, you have to understand how this works. We will modify the save so that the object event associated with the main character is glitched. When the game will load your character (i.e. when the save loads), it will execute the callback associated with this glitched object event. This callback leads to somewhere in the box data, a little after the glitched sprite animation callback used by ACE:
 
@@ -246,19 +246,30 @@ You can create them using the hexadecimal writer:
 
 ```
 Box  1: 1A B0 9F E5
-Box  2: 0B C0 A0 E3
-Box  3: 00 C0 CB E5
-Box  4: 02 10 9F E5
-Box  5: 0E 00 8F E2
-Box  6: 34 F0 8F E2
-Box  7: 99 A9 08 08
-Box  8: 8F 8E 00 00
-Box  9: 98 70 00 00
-Box 10: 56 73 03 02
-Box 11: 04 00 A0 E1
-Box 12: 11 FF 2F E1
-Boxes 13-14: 00 00 00 00
+Box  2: 00 C0 DB E5
+Box  3: 1A 10 9F E5
+Box  4: 0E 00 50 E1
+Box  5: 2A 00 8F 02
+Box  6: 02 00 5C 03
+Box  7: 10 F0 8F E2
+Box  8: F5 E2 00 00
+Box  9: 93 70 00 00
+Box 10: FF 7F 00 03
+Boxes 11-14: 00 00 00 00
+```
 
+```
+Box  1: 56 73 03 02
+Box  2: 99 A9 08 08
+Box  3: 0A F0 8F 02
+Box  4: 16 B0 1F E5
+Box  5: 0B C0 A0 E3
+Box  6: 00 C0 CB E5
+Box  7: 06 F0 8F E2
+Box  8: 04 00 A0 E1
+Box  9: 00 00 00 00
+Box 10: 11 FF 2F E1
+Boxes 11-14: 00 00 00 00
 ```
 
 It will create a Porygon. Store it somewhere (in another slot of the crafting table area or before the last row of BOX 11).
@@ -290,7 +301,7 @@ BOX 12:
 -  -  -  -  -  -
 A  E  C  +  +  +
 x  x  x  x  x  x
-A  P  E  F  M  Q
+A  E  P  F  M  Q
 T  +  +  +  +  +
 
 -: Empty slot
@@ -310,40 +321,53 @@ Ensure your second exit code bootstrap (the one in the crafting table area) is m
 
 Also, setup your BOX 14 so that triggering ACE will only open the pokedex completion diploma without doing anything else (for that you can either set up the hex writer with only `00000000` as box names, or you can set up the hexecutor with the command `10FF2FE1` in BOX 1 name).
 
-At this point, save your game. Now we will ensure that everything's okay.
+At this point, save your game. Now we will ensure that everything is okay.
 
 *Reminder: the data in the crafting table area, below the third row, will be executed automatically when your save loads. Thus we must be careful and ensure it is correct!*
 
 1. Move the crafting table bad egg in the last slot of BOX 12, so that when you trigger ACE, it will not jump over the crafting table data (and thus it will execute it).
 2. Trigger ACE. It should open the pokedex completion diploma. Now your ACE trigger (and the persistence) should be active.
 3. Restore the crafting table bad egg in its original position.
-4. Briefly press R: each time you press it, it should open the Pokedex completion diploma.
+4. Briefly press R to trigger ACE: each time you press it, it should open the Pokedex completion diploma.
 5. Enter/leave a building, open/close the Pokedex. It shouldn't crash.
 6. Move the crafting table bad egg in the last slot of BOX 12 again.
-7. Move the exit code bootstrap of the crafting table area one row down (it should be in the last row).
-8. Briefly press R many times. It should not crash (and it should not open the diploma). Now your ACE trigger should be inactive.
-9. Restore the crafting table bad egg and the exit code bootstrap back in their original positions.
-10. Pressing R should not do anything. Enter or leave a building.
+7. Briefly press R. It should open the diploma. Now your ACE trigger should be inactive:
+pressing R shouldn't do anything.
+8. Unmark the second exit code bootstrap (the one in the crafting table area).
+9. Trigger ACE (and exit the summary screen quickly). It should not open the diploma, but the ACE trigger (and persistence) should now be active again.
+10. Restore the crafting table bad egg in its original position.
+11. Test by pressing R that the ACE trigger is active (it should open the diploma).
+12. Enter/leave a building, open/close the Pokedex. It shouldn't crash.
 
-If there was no crash, you can proceed.
-
-**In order to activate the persistence:**
-
-Your BOX 12 should look like the scheme above.
-
-1. Move the crafting table bad egg in the last slot of BOX 12.
-2. Trigger ACE. It should open the pokedex completion diploma. Now your ACE trigger (and the persistence) should be active.
-3. Restore the crafting table bad egg in its original position.
-4. Your setup should look like the one above.
-5. You can do some more tests by pressing R and ensuring there are no crashes, and then you can save.
-
-Note that while the persistence is active, the pokedex completion diploma will open once each time you load your save.
+If there was no crash, you can proceed. Your setup should look like the scheme above,
+with the second exit code bootstrap unmarked. If it is the case, you can finally save:
+good job, you successfully set up the persistence!
 
 **In order to disable the persistence:**
 
-1. Do the exact same steps as for the activation.
-2. Enter in a new map (you can enter or leave a building).
-3. Test that your ACE trigger is disabled (pressing R shouldn't do anything), and then you can save.
+Your BOX 12 should look like the scheme above.
+
+1. Mark the second exit code bootstrap (the one in the crafting table area).
+2. Move the crafting table bad egg in the last slot of BOX 12, so that when you trigger ACE, it will not jump over the crafting table data (and thus it will execute it). 
+3. Trigger ACE (by pressing R if your ACE trigger is active). It should open the diploma.
+4. Restore the crafting table bad egg in its original position.
+5. Enter in a new map (you can enter or leave a building).
+6. Test that your ACE trigger is disabled (pressing R shouldn't do anything).
+ 
+Then you can save.
+
+**In order to reactivate the persistence:**
+
+Your BOX 12 should look like the scheme above.
+
+1. Unmark the second exit code bootstrap (the one in the crafting table area).
+2. Move the crafting table bad egg in the last slot of BOX 12, so that when you trigger ACE, it will not jump over the crafting table data (and thus it will execute it). 
+3. Trigger ACE (and exit the summary screen quickly). It should not open the diploma, but the ACE trigger (and persistence) should now be active again.
+4. Restore the crafting table bad egg in its original position.
+5. Enter in a new map (you can enter or leave a building).
+6. Test that your ACE trigger is enabled by pressing R (it should execute your payload).
+
+Then you can save.
 
 ## BONUS: Trigger a different payload when L+R is pressed
 
