@@ -403,7 +403,7 @@ Now, in order to open the memory editor, you can just trigger ACE as usual (pref
 - If you started it inside a menu, you should return to the overworld in order to be able to see it (however this will fail to pause the game and your inputs will be captured by both the memory editor and the overworld)
 - The 4 first bytes represent the address, the last one the value
 - Choose the desired address, and then you can modify the value and press A to confirm the modification
-- L and R can be used to change the value by 0x10
+- L and R can be used to change the value by 0x10 (don't use R if it is already the key you use to start the memory editor)
 - Press B to exit the memory editor
 
 ## Appendix: in case of failure
