@@ -7,6 +7,8 @@ Then, we will create a bad egg (to use with the freezer) that will allow you to 
 
 Finally, in the last (optional) part, we will add some more components to our ACE environment allowing the former bad egg to automatically be loaded when your save load.
 
+Thanks to Tino for reporting me some issues and investigating them!
+
 ## Prerequisite
 
 - A stable ACE glitch species such as [0x40E9](stable-ace.md) (with its Thumb->ARM bootstrap)
@@ -22,7 +24,25 @@ In this section, we will update the Thumb->ARM bootstrap and the exit code boots
 Moreover, it will work regardless of the current processor mode (Thumb/ARM) and PC-alignment (+0/+2): in every case, it will switch the processor to ARM mode and make the PC register misaligned (+2).
 - The new exit code bootstrap will allow us to choose beetwen the Pokedex Completion Diploma and the `lr` exit code just by changing its marking. Moreover, it will not depend on the CPSR flags anymore, making it more stable when used outside of the standard sprite animation ACE context.
 
-The new Thumb->ARM bootstrap (let's call it just *ARM bootstrap* now) can be made with the following code (using the hexadecimal writer):
+Before making these two new bootstraps, let's make another Pokemon that will be charged to
+reset the CPSR status registers so that the old ACE codes will still work (because most of the traditional ACE codes assume the CPSR status registers to be 0). Using the hexadecimal writer:
+
+```
+Box  1: 00 B0 A0 E3
+Box  2: 01 B0 9B E2
+Box  3: 40 F0 8F E2
+Box  4: 00 00 00 00
+Box  5: 00 00 00 02
+Box  6: 00 00 00 00
+Box  7: 00 00 00 00
+Box  8: D0 0E 00 00
+Boxes 9-14: 00 00 00 00
+```
+
+This should create a Bulbasaur. Move it somewhere after your current Thumb->ARM bootstrap
+and exit code bootstrap.
+
+Now, the new Thumb->ARM bootstrap (let's call it just *ARM bootstrap* now) can be made with the following code (using the hexadecimal writer):
 
 ```
 Box  1: 78 46 00 00
@@ -184,7 +204,7 @@ Ensure that your exit code bootstrap is marked (the freezer must be executed wit
 Trigger ACE by looking at the summary of your stable ACE species (it shouldn't crash).
 Now, the ACE-trigger should be active. You can test it by pressing R: it should trigger ACE and thus open the pokedex completion diploma again. As the Freezer is currently active in your ACE setup, it will have as effect to execute it again and this it will disable the ACE-trigger.
 
-If this worked, well done! You can now enable the ACE trigger again (by manually triggering ACE with your stable ACE species), and then you can freely remove the freezer (and the two elements next to it) and execute the ACE you want by pressing R :)
+If this worked, well done! You can now enable the ACE trigger again (by manually triggering ACE with your stable ACE species), and then you can freely remove the freezer and the two elements next to it (just move them somewhere before the last row of BOX 11) and execute the ACE you want by pressing R :)
 
 *NOTE: Pressing R succintly will only trigger ACE once. If you press it more than 15 frames, it will start triggering ACE twice a frame until you release R.*
 
@@ -272,7 +292,11 @@ Box 10: 11 FF 2F E1
 Boxes 11-14: 00 00 00 00
 ```
 
-It will create a Porygon. Store it somewhere (in another slot of the crafting table area or before the last row of BOX 11).
+It will create a Porygon.
+**When moving this Porygon, always use the group select and select an area larger than 1x1**
+(it does not matter whether Porygon is the only Pokemon in the selection or not, but the area should not be 1x1). Otherwise, the game will try to restore the PPs of this Porygon,
+which will alter its data.
+Store it somewhere (in another slot of the crafting table area or before the last row of BOX 11).
 
 ```
 Box  1: 28 10 9F E5
@@ -292,9 +316,11 @@ Box 14: 00 00 00 00
 ```
 
 It will create a Porygon 2.
-You should also have a second copy of the ARM bootstrap and the exit code bootstrap (cf. section *Updating your bootstraps*).
+**As for the other Porygon, when moving this Porygon 2, always use the group select and select an area larger than 1x1**.
 
-Dispose everything like that:
+You should also have a second copy of the ARM bootstrap and the exit code bootstrap (cf. section *Updating your bootstraps*). If not, you should generate them again.
+
+Then, dispose everything like that:
 
 ```
 BOX 12:
@@ -310,10 +336,10 @@ E: Exit code bootstrap (Abra)
 C: Crafting table (bad egg)
 +: Area of the crafting table
 x: Never put anything here!
-P: Porygon
+P: Porygon (use group selection > 1x1 when moving!)
 F: Freezer (bad egg)
 M: Registry-saver extension (Metapod)
-Q: Porygon 2
+Q: Porygon 2 (use group selection > 1x1 when moving!)
 T: ACE-trigger (bad egg)
 ```
 
