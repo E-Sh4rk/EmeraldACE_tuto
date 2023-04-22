@@ -52,3 +52,5 @@ Here are some notes about the execution:
 - The register `r1` will contain the address of the HeXecutor data (useful to compute ASLR-dependent addresses)
 - Your code should end with a `bx r0`or `bx lr` instruction.
 - The PC register will not be misaligned as it is the case for traditional ACE executions.
+- The initial state of the carry flag in the `CPSR` register is not guaranteed,
+thus you should avoid using `ADC` or `SBC` as in traditional ACE (`ADD` and `SUB` should be used instead).
