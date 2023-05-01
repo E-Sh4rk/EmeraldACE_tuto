@@ -7,7 +7,7 @@ Then, we will create a bad egg (to use with the freezer) that will allow you to 
 
 Finally, in the last (optional) part, we will add some more components to our ACE environment allowing the former bad egg to automatically be loaded when your save load.
 
-Thanks to Tino for reporting me some issues and investigating them!
+Thanks to TimoVM for reporting me some issues and investigating them!
 
 ## Prerequisite
 
