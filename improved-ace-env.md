@@ -269,10 +269,10 @@ Box  1: 1A B0 9F E5
 Box  2: 00 C0 DB E5
 Box  3: 1A 10 9F E5
 Box  4: 0E 00 50 E1
-Box  5: 2A 00 8F 02
+Box  5: 1E 00 8F 02
 Box  6: 02 00 5C 03
 Box  7: 10 F0 8F E2
-Box  8: F5 E2 00 00
+Box  8: 69 22 00 00
 Box  9: 93 70 00 00
 Box 10: FF 7F 00 03
 Boxes 11-14: 00 00 00 00
@@ -281,22 +281,18 @@ Boxes 11-14: 00 00 00 00
 ```
 Box  1: 56 73 03 02
 Box  2: 99 A9 08 08
-Box  3: 0A F0 8F 02
-Box  4: 16 B0 1F E5
-Box  5: 0B C0 A0 E3
-Box  6: 00 C0 CB E5
-Box  7: 06 F0 8F E2
-Box  8: 04 00 A0 E1
-Box  9: 00 00 00 00
-Box 10: 11 FF 2F E1
+Box  3: 06 F0 4F E2
+Box  4: 08 F0 8F 12
+Box  5: 04 00 A0 E1
+Box  6: 11 FF 2F E1
+Box  7: 00 00 00 00
+Box  8: 24 B0 1F E5
+Box  9: 0B C0 A0 13
+Box 10: 00 C0 CB E5
 Boxes 11-14: 00 00 00 00
 ```
 
-It will create a Porygon.
-**When moving this Porygon, always use the group select and select an area larger than 1x1**
-(it does not matter whether Porygon is the only Pokemon in the selection or not, but the area should not be 1x1). Otherwise, the game will try to restore the PPs of this Porygon,
-which will alter its data.
-Store it somewhere (in another slot of the crafting table area or before the last row of BOX 11).
+It will create a Porygon. Store it somewhere (in another slot of the crafting table area or before the last row of BOX 11).
 
 ```
 Box  1: 28 10 9F E5
@@ -316,7 +312,6 @@ Box 14: 00 00 00 00
 ```
 
 It will create a Porygon 2.
-**As for the other Porygon, when moving this Porygon 2, always use the group select and select an area larger than 1x1**.
 
 You should also have a second copy of the ARM bootstrap and the exit code bootstrap (cf. section *Updating your bootstraps*). If not, you should generate them again.
 
@@ -336,10 +331,10 @@ E: Exit code bootstrap (Abra)
 C: Crafting table (bad egg)
 +: Area of the crafting table
 x: Never put anything here!
-P: Porygon (use group selection > 1x1 when moving!)
+P: Porygon
 F: Freezer (bad egg)
 M: Registry-saver extension (Metapod)
-Q: Porygon 2 (use group selection > 1x1 when moving!)
+Q: Porygon 2
 T: ACE-trigger (bad egg)
 ```
 
@@ -359,11 +354,11 @@ At this point, save your game. Now we will ensure that everything is okay.
 6. Move the crafting table bad egg in the last slot of BOX 12 again.
 7. Briefly press R. It should open the diploma. Now your ACE trigger should be inactive:
 pressing R shouldn't do anything.
-8. Unmark the second exit code bootstrap (the one in the crafting table area).
-9. Trigger ACE (and exit the summary screen quickly). It should not open the diploma, but the ACE trigger (and persistence) should now be active again.
-10. Restore the crafting table bad egg in its original position.
-11. Test by pressing R that the ACE trigger is active (it should open the diploma).
-12. Enter/leave a building, open/close the Pokedex. It shouldn't crash.
+1. Unmark the second exit code bootstrap (the one in the crafting table area).
+2. Trigger ACE (and exit the summary screen quickly). It should not open the diploma, but the ACE trigger (and persistence) should now be active again.
+3.  Restore the crafting table bad egg in its original position.
+4.  Test by pressing R that the ACE trigger is active (it should open the diploma).
+5.  Enter/leave a building, open/close the Pokedex. It shouldn't crash.
 
 If there was no crash, you can proceed. Your setup should look like the scheme above,
 with the second exit code bootstrap unmarked. If it is the case, you can finally save:
