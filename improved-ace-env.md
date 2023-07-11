@@ -144,14 +144,15 @@ This should create a Machop. You can store it somewhere (we do not need it now).
 
 ## The ACE trigger bad egg
 
-This purpose of this section is to create a bad egg that, when executed with the freezer, allows to trigger ACE for anywhere just by pressing R.
+This purpose of this section is to create a bad egg that, when executed with the freezer, allows to trigger ACE from anywhere just by pressing R.
 
 **WARNING: This is NOT compatible with the old version of the *memory editor + save hack*.
 Please disable your save hack before following this section: you will then be able to [update your memory editor launcher](hex-editor.md) so that it works with this new setup.**
 
-Before following this section, please ensure you have extended your freezer with the [Registry-Saver Metapod](freezer.md).
+Before following this section, please ensure you have extended your freezer with the [Registry-Saver Metapod](freezer.md). The freezer (and its Metapod extension)
+should not be in the ACE area for now, but they will be used after.
 
-This bad egg can be created with 2 codes using the hexadecimal writer. As usual, do not look at the box 12 between the execution of the first code and the execution of the second one, or it will corrupt the data you are writing.
+The bad egg we want to create can be generated with 2 codes using the hexadecimal writer. As usual, do not look at the box 12 between the execution of the first code and the execution of the second one, or it will corrupt the data you are writing.
 
 ```
 CODE 1:
@@ -183,7 +184,7 @@ Box 10: 00 00 00 00
 Boxes 11-14: 00 00 00 00
 ```
 
-It should create a bad egg. Move the freezer, the metapod extension and this bad egg as follows (their exact location is not important but it must be after the exit code bootstrap):
+It should create a bad egg. Move the freezer, the Metapod extension and this bad egg as follows (their exact location is not important but it must be after the exit code bootstrap):
 
 ```
 BOX 14:
