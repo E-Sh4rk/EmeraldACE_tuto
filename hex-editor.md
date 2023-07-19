@@ -397,7 +397,7 @@ The Thumb<->ARM switch must be marked in order to switch execution to THUMB (the
 
 That's it! You can save your game.
 
-Now, in order to open the memory editor, you can just trigger ACE as usual (preferably with R if you have setup the improved ACE environment). If it crashes, please refer to the next section.
+Now, in order to open the memory editor, you can just trigger ACE as usual (preferably with R if you have setup the improved ACE environment, and with your first Abra in box 12 unmarked in order not to open the certificate). If it crashes, please refer to the next section.
 
 **How to use the memory editor:**
 - If you started it inside a menu, you should return to the overworld in order to be able to see it (however this will fail to pause the game and your inputs will be captured by both the memory editor and the overworld)
