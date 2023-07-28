@@ -63,7 +63,7 @@ Box 12: _ p Q ? n _ _ _	[ pQ?n   ]
 Box 13: 1 R ? n T _ ? n	[1R?nT ?n]
 ```
 
-Do not execute this code with 0x611. Instead, restart your game: it will reset the value of some CPU registers. Now, open the summary of the decamark in BOX 10 slot 19. It should open the Pokedex completion diploma. Moreover, your pokemon in the BOX 10 slot 20 should have turned into a bad egg: this is your Thumb->ARM bootstrap.
+Do not execute this code with 0x611. Instead, save your game and reboot: it will reset the value of some CPU registers. Now, open the summary of the decamark in BOX 10 slot 19. It should open the Pokedex completion diploma. Moreover, your pokemon in the BOX 10 slot 20 should have turned into a bad egg: this is your Thumb->ARM bootstrap.
 
 Move this bad egg in your BOX 12 slot 7 (it must be there each time you want to execute a regular ACE code using 0x40E9), and take the 0x40E9 decamark in your party. Now, you will be able to trigger an ACE code just by looking at its summary. You can save (unless you prefer to test it before, in this case, refer to next section).
 
