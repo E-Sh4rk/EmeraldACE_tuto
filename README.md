@@ -1,6 +1,6 @@
 # Pokémon Emerald ACE codes and tutorials
 
-These glitches can be performed on real hardware, or on the latest version of the [https://mgba.io/](mGBA) emulator
+These glitches can be performed on real hardware, or on the latest version of the [mGBA](https://mgba.io/) emulator
 with the original (dumped) GBA BIOS. Other emulators might not be accurate enough.
 
 Summary:
