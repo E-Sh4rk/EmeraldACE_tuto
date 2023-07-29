@@ -1,5 +1,7 @@
 # Pokémon Emerald ACE codes and tutorials
 
+**This repository is deprecated. Tutorials have been moved here: [https://e-sh4rk.github.io/ACE3](https://e-sh4rk.github.io/ACE3)**
+
 These glitches can be performed on real hardware, or on the latest version of the [mGBA](https://mgba.io/) emulator
 with the original (dumped) GBA BIOS. Other emulators might not be accurate enough.
 
